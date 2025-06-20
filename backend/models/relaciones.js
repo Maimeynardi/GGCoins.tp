@@ -1,11 +1,10 @@
-const USUARIOS = require('../modelos/usuarios.js');
-const VENTAS = require('../modelos/ventas.js');
-const TIPOS_USUARIO = require('../modelos/tipos_usuario.js');
-const DETALLES_VENTA = require('../modelos/detalles_venta.js');
-const TIPOS_PRODUCTO = require('../modelos/tipos_producto.js');
-const PRODUCTOS= require('../modelos/productos.js');
+const USUARIOS = require('../models/usuarios.js');
+const VENTAS = require('../models/ventas.js');
+const TIPOS_USUARIO = require('../modelstipos_usuario.js');
+const DETALLES_VENTA = require('../modelsdetalles_venta.js');
+const TIPOS_PRODUCTO = require('../modelstipos_producto.js');
+const PRODUCTOS= require('../models/productos.js');
 const TICKET = require('../models/ticket.js');
-const { FOREIGNKEYS } = require('sequelize/lib/query-types');
 
 //RELACION ENTRE TIPOS_USUARIOS Y USUARIOS:
 TIPOS_USUARIO.hasMany(USUARIOS,{foreignKey:'ID_TIPO'});
@@ -21,7 +20,7 @@ VENTAS.belongsTo(DETALLES_VENTA,{foreignKey:'ID_DETALLE'});
 
 
 //RELACIONES ENTRE TICKET Y VENTA:
-TICKET.hasOne('VENTAS',{FOREIGNKEYS:'ID_VENTAS'});
+TICKET.hasOne('VENTAS',{foreignKey:'ID_VENTAS'});
 VENTAS.hasOne('TICKET',{foreignKey:'ID_TICKET'})
 
 module.exports = {
@@ -31,4 +30,5 @@ module.exports = {
     PRODUCTOS,
     TIPOS_PRODUCTO,
     TIPOS_USUARIO
+    TICKET
 };
