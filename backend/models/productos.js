@@ -39,6 +39,10 @@ const PRODUCTOS = sequelize.define('PRODUCTOS',{
     PLATAFORMA:{
         type:DataTypes.STRING(250),
         allowNull:false
+    },
+    ACTIVO:{
+        type:DataTypes.BOOLEAN,
+        allowNull:false
     }
 },{
     tableName:'PRODUCTOS'
