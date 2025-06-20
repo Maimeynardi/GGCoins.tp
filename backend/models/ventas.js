@@ -6,7 +6,7 @@ const VENTAS = sequelize.define('VENTAS',{
         allowNull:false,
         type: DataTypes.STRING(50)
     },
-    ID_VENTAS:{
+    ID_VENTA:{
         allowNull:false,
         primaryKey:true,
         type: DataTypes.INTEGER,
