@@ -2,7 +2,7 @@ const {DataTypes} = require('sequelize');
 const sequelize = require('../configuracionDataBase/BaseDeDatos.js');
 
 
-const DETALLES_VENTA = sequelize.define('DETALLES_VENTA',{
+const DETALLE_VENTA = sequelize.define('DETALLE_VENTA',{
     ID_DETALLE:{
         allowNull:false,
         type: DataTypes.INTEGER,
@@ -26,7 +26,7 @@ const DETALLES_VENTA = sequelize.define('DETALLES_VENTA',{
     },
     
 },{
-    tableName:'DETALLES_VENTA'
+    tableName:'DETALLE_VENTA'
 })
 
-module.exports = DETALLES_VENTA
+module.exports = DETALLE_VENTA
