@@ -22,7 +22,7 @@ const VENTAS = sequelize.define('VENTAS',{
     },
 
 },
-    {tableName:'VENTAS'}
+    {tableName:'VENTAS',timestamps: true}
 );
 
 module.exports = VENTAS;

@@ -14,7 +14,7 @@ const TIPOS_PRODUCTO =  sequelize.define('TIPOS_PRODUCTO',{
     }
 
 },{
-    tableName:'TIPOS_PRODUCTO'
+    tableName:'TIPOS_PRODUCTO',timestamps: true
 })
 
 module.exports = TIPOS_PRODUCTO

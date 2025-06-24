@@ -26,7 +26,7 @@ const DETALLE_VENTA = sequelize.define('DETALLE_VENTA',{
     },
     
 },{
-    tableName:'DETALLE_VENTA'
+    tableName:'DETALLE_VENTA',timestamps: true
 })
 
 module.exports = DETALLE_VENTA

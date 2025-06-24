@@ -36,7 +36,7 @@ const TICKET = sequelize.difine('TICKETS',{
         type:DataTypes.FLOAT,
         allowNull:false,     
     }
-},{TableName: 'TICKETS'})
+},{TableName: 'TICKETS',timestamps: true})
 
 module.exports = TICKET;
 
