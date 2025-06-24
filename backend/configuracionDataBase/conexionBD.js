@@ -1,12 +1,13 @@
 const sequelize = require('./BaseDeDatos.js');
 
-
 const conexionBaseDeDatos = async () =>{
     try {
 
         await sequelize.authenticate();
+        await sequelize.sync({ alter: true });
 
-        console.log(`Conexion Exitosa`)
+        console.log(`Conexion Exitosa`);
+
 
     } catch (error) {
 
