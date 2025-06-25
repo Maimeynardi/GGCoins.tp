@@ -1,5 +1,8 @@
-document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('btnAgregarProducto').addEventListener('submit',agregarProducto);
+
+document.addEventListener('DOMContentLoaded', () => {
+
+    document.getElementById('altaProductoForm').addEventListener('submit',agregarProducto);
+    console.log('Buenos dias')
 
 });
 
@@ -12,11 +15,11 @@ const obtenerDatosProductos = () =>{
     const precio = parseFloat(document.getElementById('precio').value);
     const url_imagen = document.getElementById('imagen').value;
 
-    if(categoria == 'Juegos'){
-        categoria  = 1;
+/*     if(categoria == 'Juegos'){
+        categoria = 1
     }else{
-        cantidad = 2;
-    }
+        categoria = 2;
+    } */
 
     const producto = {nombre,descripcion,categoria,cantidad,precio,url_imagen};
 
@@ -38,15 +41,18 @@ const validacionDatosIngresados = () =>{
     let errorPrecio = document.getElementById('validacionPrecio');
     let errorImagen = document.getElementById('validacionImagen');
     let errorCantidad = document.getElementById('validacionCantidad')
-
-
+/* 
+    [nombre,descripcion,precio,url_imagen,cantidad].forEach(element => {
+        element.classList.remove('is-invalid','is-valid')
+    });
+ */
     if(!nombre.value.trim()){
         nombre.classList.add('is-invalid')
         bandera = false;
         errorNombre.classList.add('invalid-feedback');
         errorNombre.innerHTML = `Error, Debe ingresar el nombre del Producto`;
     }else{
-        marca.classList.add('is-valid');
+        nombre.classList.add('is-valid');
         errorNombre.innerHTML = `Dato Correcto;`
     }
     
@@ -89,6 +95,7 @@ const validacionDatosIngresados = () =>{
         cantidad.classList.add('is-valid');
         errorCantidad.innerHTML = `Dato Correcto;`;
     }
+
     return bandera ;
 
 }
@@ -104,7 +111,7 @@ const agregarProducto = async (e) =>{
             method:'POST',
             headers:{
                 'Content-Type': 'application/json'
-            },body:JSON.stringify(productoNuevo)
+            },body:JSON.stringify({productoNuevo})
         }) ;
 
         if (!res.ok){
