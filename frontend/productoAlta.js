@@ -1,18 +1,18 @@
 document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('btonAgregarProducto').addEventListener('submit',validacionDatosIngresados);
+    document.getElementById('btnAgregarProducto').addEventListener('submit',agregarProducto);
 
 });
 
 const obtenerDatosProductos = () =>{
 
-    if(!validacionDatosIngresados()){return}
     const nombre = document.getElementById('nombre').value;
     const descripcion = document.getElementById('descripcion').value;
     const categoria = document.getElementById('categoria').value;
+    //falta cantidad
+    //falta plataforma
     const precio = parseFloat(document.getElementById('precio').value);
     const url_imagen = document.getElementById('imagen').value;
-
-
+    
     const producto = {nombre,descripcion,categoria,precio,url_imagen};
 
     return producto;
@@ -74,4 +74,28 @@ const validacionDatosIngresados = () =>{
 
     return bandera ;
 
+}
+
+const agregarProducto = async (e) =>{
+    e.preventDefault();
+
+    if(!validacionDatosIngresados()){return;}
+
+    const productoNuevo = obtenerDatosProductos();
+    try {
+        const res = await fetch(`http://localhost:3030/productos/crearProducto`,{
+            method:'POST',
+            headers:{
+                'Content-Type': 'application/json'
+            },body:JSON.stringify(productoNuevo)
+        }) ;
+
+        if (!res.ok){
+            throw new Error(`Error:${res.statusText}`)
+        }
+
+        console.log(productoNuevo)
+    } catch (error) {
+        alert('error al cargar el producto')
+    }
 }
