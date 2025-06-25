@@ -1,14 +1,17 @@
 document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('btonAgregarProducto').addEventListener('submit',validacionDatosIngresados);
 
 });
 
 const obtenerDatosProductos = () =>{
 
+    if(!validacionDatosIngresados()){return}
     const nombre = document.getElementById('nombre').value;
     const descripcion = document.getElementById('descripcion').value;
     const categoria = document.getElementById('categoria').value;
     const precio = parseFloat(document.getElementById('precio').value);
     const url_imagen = document.getElementById('imagen').value;
+
 
     const producto = {nombre,descripcion,categoria,precio,url_imagen};
 
@@ -20,13 +23,11 @@ const validacionDatosIngresados = () =>{
 
     const nombre = document.getElementById('nombre');
     const descripcion = document.getElementById('descripcion');
-    const categoria = document.getElementById('categoria');
     const precio = document.getElementById('precio');
     const url_imagen = document.getElementById('imagen');
 
     let errorNombre = document.getElementById('validacionNombre');
     let errorDescripcion = document.getElementById('validacionDescripcion');
-    let errorCategoria =document.getElementById('validacionCategoria');
     let errorPrecio = document.getElementById('validacionPrecio');
     let errorImagen = document.getElementById('validacionImagen');
 
@@ -71,9 +72,6 @@ const validacionDatosIngresados = () =>{
         errorPrecio.innerHTML = `Dato Correcto;`;
     }
 
-
-
-
-
+    return bandera ;
 
 }

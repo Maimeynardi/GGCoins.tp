@@ -1,7 +1,7 @@
 const {DataTypes, DATE} = require('sequelize')
 const sequelize = require('../configuracionDataBase/BaseDeDatos.js')
 
-const TICKET = sequelize.difine('TICKETS',{
+const TICKET = sequelize.define('TICKETS',{
     ID_TICKET:{
         primaryKey:true,
         allowNull:false,

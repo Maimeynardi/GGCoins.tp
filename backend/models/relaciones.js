@@ -1,7 +1,7 @@
 const USUARIOS = require('../models/usuarios.js');
 const VENTAS = require('../models/ventas.js');
 const TIPOS_USUARIO = require('../models/tipos_usuario.js');
-const DETALLES_VENTA = require('../models/detalles_venta.js');
+const DETALLES_VENTA = require('../models/detalle_venta.js');
 const TIPOS_PRODUCTO = require('../models/tipos_producto.js');
 const PRODUCTOS= require('../models/productos.js');
 const TICKET = require('../models/ticket.js');
