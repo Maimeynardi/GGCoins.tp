@@ -28,7 +28,7 @@ const PRODUCTOS = sequelize.define('PRODUCTOS',{
         type: DataTypes.DOUBLE,
         allowNull:false,
     }, 
-    CANDTIDAD:{
+    CANTIDAD:{
         type: DataTypes.INTEGER,
         allowNull:false
     },

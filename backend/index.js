@@ -20,6 +20,7 @@ const productosRouter = require('./routes/productosRouter.js')
 
 
 app.use('/productos',productosRouter)
+
 app.listen(port,async ()=>{
     await databaseConection();
     await cargarTiposProducto();
