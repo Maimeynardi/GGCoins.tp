@@ -20,8 +20,8 @@ const productosRouter = require('./routes/productosRouter.js')
 
 
 app.use('/productos',productosRouter)
-app.listen(port,()=>{
-    databaseConection();
-    cargarTiposProducto();
+app.listen(port,async ()=>{
+    await databaseConection();
+    await cargarTiposProducto();
     console.log(`Servidor Levantado`)
 })

@@ -15,6 +15,6 @@ router.post('/:id',modificarProducto);
 
 router.get('/:id',obtenerProductoPorID);
 
-router.get(`/:categoria`,obtenerProductoPorCategoria)
+router.get('/:categoria',obtenerProductoPorCategoria)
 
 module.exports = router;
