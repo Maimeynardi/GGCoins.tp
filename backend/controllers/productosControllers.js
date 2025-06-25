@@ -21,7 +21,6 @@ const obtenerProductoPorID = async (req,res) =>{
     }
 }
 
-
 const crearProducto = async (req,res) => {
     try {
         const productoNuevo = await PRODUCTOS.create(req.body);
