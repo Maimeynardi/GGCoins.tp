@@ -42,10 +42,12 @@
             <div class="mb-3">
                 <label for="nombre" class="form-label">Nombre del producto</label>
                 <input type="text" class="form-control" id="nombre" required>
+                <div id="validacionNombre"></div>
             </div>
             <div class="mb-3">
                 <label for="descripcion" class="form-label">Descripción</label>
                 <textarea class="form-control" id="descripcion" rows="3" required></textarea>
+                <div id="validacionDescripcion"></div>
             </div>
             <div class="mb-3">
                 <label for="categoria" class="form-label">Categoría</label>
@@ -53,14 +55,17 @@
                     <option>Juegos</option>
                     <option>Créditos</option>
                 </select>
+                <div id="validacionCategoria"></div>
             </div>
             <div class="mb-3">
                 <label for="precio" class="form-label">Precio</label>
                 <input type="number" class="form-control" id="precio" required>
+                <div id="validacionPrecio"></div>
             </div>
             <div class="mb-3">
                 <label for="imagen" class="form-label">URL de imagen</label>
                 <input type="url" class="form-control" id="imagen" required>
+                <div id="validacionImagen"></div>
             </div>
             <button type="submit" class="btn btn-success w-100">Guardar producto</button>
         </form>
