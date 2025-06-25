@@ -5,10 +5,6 @@ const conexionBaseDeDatos = async () =>{
 
         await sequelize.authenticate();
         await sequelize.sync({ alter: true });
-<<<<<<< HEAD
-
-=======
-
         console.log(`Conexion Exitosa`);
 
 
