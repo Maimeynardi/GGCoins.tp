@@ -8,28 +8,36 @@ const obtenerDatosProductos = () =>{
     const nombre = document.getElementById('nombre').value;
     const descripcion = document.getElementById('descripcion').value;
     const categoria = document.getElementById('categoria').value;
-    //falta cantidad
-    //falta plataforma
+    const cantidad = parseFloat(document.getElementById('cantidad').value);
     const precio = parseFloat(document.getElementById('precio').value);
     const url_imagen = document.getElementById('imagen').value;
-    
-    const producto = {nombre,descripcion,categoria,precio,url_imagen};
+
+    if(categoria == 'Juegos'){
+        categoria  = 1;
+    }else{
+        cantidad = 2;
+    }
+
+    const producto = {nombre,descripcion,categoria,cantidad,precio,url_imagen};
 
     return producto;
 }
 
 const validacionDatosIngresados = () =>{
+
     let bandera = true;
 
     const nombre = document.getElementById('nombre');
     const descripcion = document.getElementById('descripcion');
     const precio = document.getElementById('precio');
     const url_imagen = document.getElementById('imagen');
+    const cantidad = document.getElementById('cantidad');
 
     let errorNombre = document.getElementById('validacionNombre');
     let errorDescripcion = document.getElementById('validacionDescripcion');
     let errorPrecio = document.getElementById('validacionPrecio');
     let errorImagen = document.getElementById('validacionImagen');
+    let errorCantidad = document.getElementById('validacionCantidad')
 
 
     if(!nombre.value.trim()){
@@ -39,7 +47,7 @@ const validacionDatosIngresados = () =>{
         errorNombre.innerHTML = `Error, Debe ingresar el nombre del Producto`;
     }else{
         marca.classList.add('is-valid');
-        ErrorMarca.innerHTML = `Dato Correcto;`
+        errorNombre.innerHTML = `Dato Correcto;`
     }
     
     if(!descripcion.value.trim()){
@@ -72,6 +80,15 @@ const validacionDatosIngresados = () =>{
         errorPrecio.innerHTML = `Dato Correcto;`;
     }
 
+    if((Number(cantidad.value))< 1){
+        cantidad.classList.add('is-invalid');
+        bandera = false;
+        errorCantidad.innerHTML = `Dato Incorrecto El cantidad debe ser un numero positivo`;
+        errorCantidad.classList.add(`invalid-feedback`);
+    }else{
+        cantidad.classList.add('is-valid');
+        errorCantidad.innerHTML = `Dato Correcto;`;
+    }
     return bandera ;
 
 }
