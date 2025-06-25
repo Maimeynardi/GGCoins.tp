@@ -53,10 +53,28 @@ const modificarProducto = async (req,res)=>{
     }
 }
 
+const obtenerProductoPorCategoria = async (req,res)=>{
+
+    try {
+        productosCategoria = await PRODUCTOS.findAll({
+            WHERE:{
+                CATEGORIA: {categoria:req.params.categoria}
+            }
+        })
+
+        res.json(productosCategoria);
+
+    } catch (error) {
+
+        res.json({message:error.message})
+
+    }
+}
 module.exports = {
     obtenerProductos,
     obtenerProductoPorID,
     crearProducto,
     eliminarProducto,
-    modificarProducto
+    modificarProducto,
+    obtenerProductoPorCategoria
 }

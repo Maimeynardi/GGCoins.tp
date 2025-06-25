@@ -13,7 +13,9 @@ app.use(express.json());
 
 const PRODUCTOS = require('./models/productos.js')
 const TIPOS_PRODUCTO = require('./models/tipos_producto.js')
+
 const cargarTiposProducto = require('./controllers/tiposProductosControllers.js')
+
 const productosRouter = require('./routes/productosRouter.js')
 
 

@@ -1,21 +1,27 @@
 const TIPOS_PRODUCTO = require('../models/tipos_producto');
 
+const cargarTiposProducto = async () => {
 
-const cargarTiposProducto = async () =>{
     try {
         const categoriaJuego = 'juego';
-        const categoriaCredito = 'Credito';
+        const categoriaCredito = 'credito';
 
-        const tipoJuego = await TIPOS_PRODUCTO.create({
-            CATEGORIA:categoriaJuego
+        // Crear o encontrar categoría "juego"
+        await TIPOS_PRODUCTO.findOrCreate({
+            where: { CATEGORIA: categoriaJuego },
+            defaults: { CATEGORIA: categoriaJuego }
         });
 
-        const tipoMoneda = await TIPOS_PRODUCTO.create({
-            CATEGORIA:categoriaCredito
+        // Crear o encontrar categoría "crédito"
+        await TIPOS_PRODUCTO.findOrCreate({
+            where: { CATEGORIA: categoriaCredito },
+            defaults: { CATEGORIA: categoriaCredito }
         });
 
-}catch(error){
-    console.log(`Error`)
-22}
-}
+        console.log('Categorías cargadas o ya existentes');
+    } catch (error) {
+        console.error('Error al cargar las categorías:', error.message);
+    }
+};
+
 module.exports = cargarTiposProducto;

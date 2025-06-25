@@ -42,7 +42,6 @@ const PRODUCTOS = sequelize.define('PRODUCTOS',{
     },
     ACTIVO:{
         type:DataTypes.BOOLEAN,
-        //CAMBIAR A DEFAULT TRUE
         allowNull:false
     }
 },{
