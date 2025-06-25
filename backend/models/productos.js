@@ -36,13 +36,9 @@ const PRODUCTOS = sequelize.define('PRODUCTOS',{
         type:DataTypes.STRING(250),
         allowNull:false
     },
-    PLATAFORMA:{
-        type:DataTypes.STRING(250),
-        allowNull:false
-    },
     ACTIVO:{
         type:DataTypes.BOOLEAN,
-        allowNull:false
+        defaultValue:true
     }
 },{
     tableName:'PRODUCTOS',timestamps: true
