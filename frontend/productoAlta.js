@@ -2,26 +2,29 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     document.getElementById('altaProductoForm').addEventListener('submit',agregarProducto);
-    console.log('Buenos dias')
+    
 
 });
 
 const obtenerDatosProductos = () =>{
+//hash map //
+    const idTipos = {
+        Juegos : 1,
+        Creditos :2
+    }
 
-    const nombre = document.getElementById('nombre').value;
-    const descripcion = document.getElementById('descripcion').value;
+    const NOMBRE = document.getElementById('nombre').value;
+    const DESCRIPCION = document.getElementById('descripcion').value;
     const categoria = document.getElementById('categoria').value;
-    const cantidad = parseFloat(document.getElementById('cantidad').value);
-    const precio = parseFloat(document.getElementById('precio').value);
-    const url_imagen = document.getElementById('imagen').value;
+    const CANTIDAD= parseFloat(document.getElementById('cantidad').value);
+    const PRECIO = parseFloat(document.getElementById('precio').value);
+    const URL_IMAGEN= document.getElementById('imagen').value;
+    
+    const ID_TIPO = idTipos[categoria]
 
-/*     if(categoria == 'Juegos'){
-        categoria = 1
-    }else{
-        categoria = 2;
-    } */
+    console.log(ID_TIPO)
 
-    const producto = {nombre,descripcion,categoria,cantidad,precio,url_imagen};
+    const producto = {NOMBRE,DESCRIPCION,ID_TIPO,CANTIDAD,PRECIO,URL_IMAGEN};
 
     return producto;
 }
@@ -40,12 +43,16 @@ const validacionDatosIngresados = () =>{
     let errorDescripcion = document.getElementById('validacionDescripcion');
     let errorPrecio = document.getElementById('validacionPrecio');
     let errorImagen = document.getElementById('validacionImagen');
-    let errorCantidad = document.getElementById('validacionCantidad')
-/* 
-    [nombre,descripcion,precio,url_imagen,cantidad].forEach(element => {
-        element.classList.remove('is-invalid','is-valid')
-    });
- */
+    let errorCantidad = document.getElementById('validacionCantidad');
+
+    const arrayDeDatos = [nombre,descripcion,precio,url_imagen,cantidad]
+
+    console.log(arrayDeDatos);
+
+    arrayDeDatos.forEach(element => {element.classList.remove('is-invalid','is-valid')});
+
+    console.log(`Despues del foreach ${arrayDeDatos}`);
+
     if(!nombre.value.trim()){
         nombre.classList.add('is-invalid')
         bandera = false;
@@ -111,13 +118,13 @@ const agregarProducto = async (e) =>{
             method:'POST',
             headers:{
                 'Content-Type': 'application/json'
-            },body:JSON.stringify({productoNuevo})
-        }) ;
+            },body:JSON.stringify(productoNuevo)
+        });
 
         if (!res.ok){
             throw new Error(`Error:${res.statusText}`)
         }
-
+        console.log('Buenos dias')
         console.log(productoNuevo)
     } catch (error) {
         alert('error al cargar el producto')
