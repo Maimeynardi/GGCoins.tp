@@ -11,7 +11,8 @@ app.use(cors());
 
 app.use(express.json());
 
-const PRODUCTOS = require('./models/productos.js')
+const PRODUCTOS = require('./models/productos.js');
+
 const TIPOS_PRODUCTO = require('./models/tipos_producto.js')
 
 const cargarTiposProducto = require('./controllers/tiposProductosControllers.js')

@@ -29,4 +29,4 @@ const eliminarUsuario = async (req, res) => {
     res.json(usuarioEliminado);
 }
 
-module.exports = { obtenerUsuarios, obtenerUsuarioPorID, crearUsuario, modificarUsuario, eliminarUsuario }
+module.exports = {obtenerUsuarios, obtenerUsuarioPorID, crearUsuario, modificarUsuario, eliminarUsuario }

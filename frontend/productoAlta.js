@@ -2,7 +2,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     document.getElementById('altaProductoForm').addEventListener('submit',agregarProducto);
-    
 
 });
 

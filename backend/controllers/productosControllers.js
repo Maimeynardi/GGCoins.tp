@@ -69,6 +69,7 @@ const obtenerProductoPorCategoria = async (req,res)=>{
 
     }
 } 
+
 module.exports = {
     obtenerProductos,
     obtenerProductoPorID,
