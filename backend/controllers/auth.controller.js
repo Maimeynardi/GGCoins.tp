@@ -18,7 +18,7 @@ exports.login = async (req,res) =>{
         const validPassword = await usuario.validPassword(PASSWORD);
 
         if(!validPassword){
-            return res.status(401).json({message:'Contrasenia invalida'})
+            return res.status(401).json({message:'Contraseña invalida'})
         }
 
         const token = jwt.sign(
@@ -28,10 +28,10 @@ exports.login = async (req,res) =>{
         );
 
         return res.status(200).json({
-            mesaage:'Inicio exitoso',
+            message:'Inicio exitoso',
             usuario:{
                 ID: usuario.ID,
-                NOMRBE: usuario.NOMRBE,
+                NOMBRE: usuario.NOMBRE,
                 EMAIL: usuario.EMAIL,
                 TIPO: usuario.TIPO
 
