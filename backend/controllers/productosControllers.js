@@ -1,10 +1,10 @@
-const { json } = require('sequelize');
+const { json, where } = require('sequelize');
 const PRODUCTOS = require('../models/productos.js');
 const { FOREIGNKEYS } = require('sequelize/lib/query-types');
 
 const obtenerProductos = async (req,res) =>{
     try {
-        const productos = await PRODUCTOS.findAll();
+        const productos = await PRODUCTOS.findAll({where:{ACTIVO:true}});
         res.json(productos);
 
     } catch (error) {
@@ -32,7 +32,7 @@ const crearProducto = async (req,res) => {
 
 const eliminarProducto = async (req,res)=>{
     try {
-        const productoEliminado = await PRODUCTOS.destroy({
+        const productoEliminado = await PRODUCTOS.update({
             WHERE:{id:req.params.id}
         })
         res.json(productoEliminado);
@@ -42,16 +42,17 @@ const eliminarProducto = async (req,res)=>{
     }
 }
 
-const modificarProducto = async (req,res)=>{
+const modificarProducto = async (req, res) => {
     try {
-        const modificarProducto = await PRODUCTOS.update(req.body,{
-            where:{id:req.params.id}
-        })
-        res.json(modificarProducto);
+        const productoModificado = await PRODUCTOS.update(
+            { ACTIVO: false }, 
+            { where: { id: req.params.id } } 
+        );
+        res.json(productoModificado);
     } catch (error) {
-        res.json({message:error.message})
+        res.json({ message: error.message });
     }
-}
+};
 
 const obtenerProductoPorCategoria = async (req,res)=>{
 
