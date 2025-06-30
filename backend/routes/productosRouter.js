@@ -3,15 +3,16 @@ const express = require('express');
 const router  = express.Router();
 
 
-const {obtenerProductos,obtenerProductoPorID,crearProducto, eliminarProducto, modificarProducto,obtenerProductoPorCategoria} = require('../controllers/productosControllers')
+const {obtenerProductos,obtenerProductoPorID,crearProducto, eliminarProducto, modificarProducto,obtenerProductoPorCategoria} = require('../controllers/productosControllers');
+const { verificarToken, Admin } = require('../middleware/authMiddlewere');
 
 router.get('/',obtenerProductos);
 
-router.post('/crearProducto',crearProducto);
+router.post('/crearProducto',verificarToken,Admin,crearProducto);
 
-router.delete('/:id',eliminarProducto);
+router.delete('/:id',verificarToken,Admin,eliminarProducto);
 
-router.post('/:id',modificarProducto);
+router.post('/:id',verificarToken,Admin,modificarProducto);
 
 router.get('/:id',obtenerProductoPorID);
 
