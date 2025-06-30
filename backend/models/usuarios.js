@@ -33,7 +33,7 @@ const USUARIOS = sequelize.define('USUARIOS',
         },
         ACTIVO:{
             type:DataTypes.BOOLEAN,
-            allowNull:false
+            defaultValue : true
         }
     },{
         tableName : 'USUARIOS',
