@@ -29,6 +29,7 @@ exports.login = async (req,res) =>{
 
         return res.status(200).json({
             message:'Inicio exitoso',
+            token: token,
             usuario:{
                 ID: usuario.ID,
                 NOMBRE: usuario.NOMBRE,
