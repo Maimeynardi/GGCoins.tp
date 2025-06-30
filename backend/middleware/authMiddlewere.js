@@ -26,9 +26,15 @@ const verificarToken = async (req,res,next) =>{
 }
 
 const Admin = (req,res,next)=>{
+    if(req.user && req.user.ID_TIPO ==='1'){
+        next()
+    }else{
+        return res.status(403).json({message:'Requiere rol de administrador'})
+    }
 
 }
 
 module.exports = {
-    verificarToken
+    verificarToken,
+    Admin
 }
