@@ -4,7 +4,7 @@ const router  = express.Router();
 
 
 const {obtenerProductos,obtenerProductoPorID,crearProducto, eliminarProducto, modificarProducto,obtenerProductoPorCategoria} = require('../controllers/productosControllers');
-const { verificarToken, Admin } = require('../middleware/authMiddlewere');
+const { verificarToken, Admin } = require('../middleware/authMiddleware');
 
 router.get('/',obtenerProductos);
 
