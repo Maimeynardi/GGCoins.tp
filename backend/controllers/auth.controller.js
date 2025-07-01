@@ -12,7 +12,7 @@ exports.login = async (req,res) =>{
         });
 
         if (!usuario){
-            return res.status(404).json({message:'Uusario no encontrado'})
+            return res.status(404).json({message:'Usuario no encontrado'})
         }
 
         const validPassword = await usuario.validPassword(PASSWORD);
@@ -22,7 +22,7 @@ exports.login = async (req,res) =>{
         }
 
         const token = jwt.sign(
-            {id: usuario.id},
+            {id: usuario.ID_USUARIO},
             process.env.JWT_SECRET,
             {expiresIn: process.env.JWT_EXPIRES_IN}
         );
@@ -31,7 +31,7 @@ exports.login = async (req,res) =>{
             message:'Inicio exitoso',
             token: token,
             usuario:{
-                ID: usuario.ID,
+                ID: usuario.ID_USUARIO,
                 NOMBRE: usuario.NOMBRE,
                 EMAIL: usuario.EMAIL,
                 TIPO: usuario.TIPO
@@ -40,6 +40,7 @@ exports.login = async (req,res) =>{
         })
 
     } catch (error) {
-        
+        console.error('Error en login:', error);
+        return res.status(500).json({ message: 'Error interno del servidor', error: error.message });
     }
 }
