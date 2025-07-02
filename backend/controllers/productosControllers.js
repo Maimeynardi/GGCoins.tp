@@ -21,14 +21,32 @@ const obtenerProductoPorID = async (req,res) =>{
     }
 }
 
-const crearProducto = async (req,res) => {
+const crearProducto = async (req, res) => {
     try {
-        const productoNuevo = await PRODUCTOS.create(req.body);
-        res.json(productoNuevo);
+        console.log('BODY:', req.body);
+        console.log('FILE:', req.file);
+
+        const { nombre, descripcion, ID_TIPO, precio, cantidad } = req.body;
+
+        const URL_IMAGEN = `/imagenes/uploads/${req.file.filename}`;
+
+        const nuevoProducto = await PRODUCTOS.create({
+            NOMBRE: nombre,
+            DESCRIPCION: descripcion,
+            ID_TIPO,
+            PRECIO: precio,
+            CANTIDAD: cantidad,
+            URL_IMAGEN
+        });
+
+        res.status(201).json(nuevoProducto);
+
     } catch (error) {
-        res.json({message:error.message})
+        console.error(error);
+        res.status(500).json({ mensaje: 'Error al crear el producto' });
     }
-}
+};
+
 
 const eliminarProducto = async (req,res)=>{
     try {
@@ -59,7 +77,7 @@ const obtenerProductoPorCategoria = async (req,res)=>{
     try {
         productosCategoria = await PRODUCTOS.findAll({
             where:{
-                ID_TIPO: {categoria:req.params.categoria}
+                ID_TIPO: req.params.categoria
             }
         })
         res.json(productosCategoria);
