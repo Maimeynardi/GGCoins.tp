@@ -6,11 +6,11 @@ const almacenamientoDeImagen = multer.diskStorage({
     destination: function (req,file,cb) {
         cb(null,'imagenes/uploads');
     },
-    filename: function(req,file,cd){
+    filename: function(req,file,cb){
         cb(null,Date.now()+path.extname(file.originalname));
     }
 });
 
-const upload = multer({storage:storage});
+const upload = multer({ storage: almacenamientoDeImagen });
 
 module.exports = upload;
