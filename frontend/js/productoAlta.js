@@ -127,9 +127,7 @@ const agregarProducto = async (e) =>{
     try {
         const res = await fetch(`http://localhost:3030/productos/crearProducto`,{
             method:'POST',
-            headers:{
-                'Content-Type': 'application/json'
-            },body: formData
+            body: formData
         });
 
         if (!res.ok){

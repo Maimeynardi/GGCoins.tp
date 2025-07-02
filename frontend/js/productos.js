@@ -31,7 +31,7 @@ function crearCardProducto(producto) {
     card.innerHTML = `
         <div class="card producto-hover text-white mx-auto">
             <div class="img-container position-relative">
-                <img src="${producto.URL_IMAGEN}" class="card-img-top" alt="${producto.NOMBRE}">
+                <img src="http://localhost:3030${producto.URL_IMAGEN}" class="card-img-top" alt="${producto.NOMBRE}">
 
                 <div class="descripcion-hover p-3">
                     <p class="mb-0 small">${producto.DESCRIPCION}</p>
@@ -39,7 +39,6 @@ function crearCardProducto(producto) {
             </div>
 
             <div class="card-body text-center">
-                <p class="categoria small mb-1">${producto.NOMBRE}</p>
                 <h5 class="card-title mb-1">${producto.NOMBRE}</h5>
                 <p class="precio fw-semibold">ARS ${producto.PRECIO.toLocaleString()}</p>
                 <button class="btn-agregar-carrito">
