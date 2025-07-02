@@ -111,21 +111,35 @@ const agregarProducto = async (e) =>{
 
     if(!validacionDatosIngresados()){return;}
 
-    const productoNuevo = obtenerDatosProductos();
+    const form = document.getElementById('altaProductoForm');
+    const formData = new FormData(form);
+
+    const idTipos = {
+        Juegos : 1,
+        Creditos :2
+    }
+
+    const categoria = document.getElementById('categoria').value;
+    const ID_TIPO = idTipos[categoria]
+
+    formData.append('ID_TIPO',ID_TIPO);
+
     try {
         const res = await fetch(`http://localhost:3030/productos/crearProducto`,{
             method:'POST',
             headers:{
                 'Content-Type': 'application/json'
-            },body:JSON.stringify(productoNuevo)
+            },body: formData
         });
 
         if (!res.ok){
             throw new Error(`Error:${res.statusText}`)
         }
-        console.log('Buenos dias')
-        console.log(productoNuevo)
+
+        const productoNuevo = await res.json();
+        console.log("Producto Creado: ",productoNuevo)
     } catch (error) {
         alert('error al cargar el producto')
+        console.error(error);
     }
 }
