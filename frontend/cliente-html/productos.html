@@ -47,39 +47,30 @@
             
 
     <main class="container mt-5">
-
+        <h2 class="mb-4 text-center">Productos</h2>
+        <!-- Tabs para filtrar por categoría -->
         <ul class="nav nav-tabs justify-content-center my-4" id="categoriaTabs" role="tablist">
             <li class="nav-item" role="presentation">
-            <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#categoriaA" type="button" role="tab">Tarjetas</button>
+                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#categoriaA" type="button" role="tab">Juegos</button>
             </li>
             <li class="nav-item" role="presentation">
-            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#categoriaB" type="button" role="tab">Créditos</button>
-            </li>
+                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#categoriaB" type="button" role="tab">Créditos</button>
         </ul>
-        
 
-        <div class="col-6 col-md-4 col-lg-3">
-            <div class="card producto-hover text-white mx-auto">
-                <div class="img-container position-relative">
-                    <img src="" class="card-img-top" alt="Valorant">
+        <div class="tab-content">
+            <!-- Tarjetas de tipo "juego" -->
+            <div class="tab-pane fade" id="categoriaA" role="tabpanel">
+                <div id="contenedor-juegos" class="row g-4"></div>
+            </div>
 
-                    <div class="descripcion-hover p-3">
-                        <p class="mb-0 small">Juego de disparos táctico 5v5 con habilidades, desarrollado por Riot Games.</p>
-                    </div>
-                </div>
-
-                <div class="card-body text-center">
-                        <p class="categoria small mb-1">Valorant</p>
-                        <h5 class="card-title mb-1">1000 Valorant Poits</h5>
-                        <p class="precio fw-semibold">ARS 10.000</p>
-                        <button class="btn-agregar-carrito">
-                            <i class="bi bi-cart-plus me-2"></i> Agregar al carrito
-                        </button>
-
-                </div>
+            <!-- Créditos de tipo "credito" -->
+            <div class="tab-pane fade" id="categoriaB" role="tabpanel">
+                <div id="contenedor-creditos" class="row g-4"></div>
             </div>
         </div>
+
     </main>
+
     <footer class="footer text-center text-white py-3">
         <div >
             <h5>GG Coins</h5>
@@ -98,6 +89,7 @@
         </div>
     </footer>
     
+    <script src="/GGCoins.tp/frontend/js/Productos.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
 </body>
 </html>
