@@ -75,12 +75,21 @@
             </div>
             <div class="mb-3">
                 <label for="imagen" class="form-label">Imagen</label>
+                <input type="file" class="form-control" id="imagen" name="imagen">
+                <div id="validacionImagen"></div>
+                <div id="previewImagen" class="mt-2">
+                    <img id="imagenActual" src="" alt="Imagen actual" style="max-width: 200px;">
+                </div>
+            </div>
+
+<!--             <div class="mb-3">
+                <label for="imagen" class="form-label">Imagen</label>
                 <input type="file" class="form-control" id="imagen" name="imagen" required>
                 <div id="validacionImagen"></div>
-            </div>
+            </div> -->
             <button type="submit" id = 'btnGuardarModificacion' class="btn btn-success w-100">Guardar modificación</button>
         </form>
     </main>
-
+ 
     <script src="/GGCoins.tp/frontend/js/dashboard/listadoProductos.js"></script>
 </body>

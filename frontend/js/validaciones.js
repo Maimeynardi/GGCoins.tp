@@ -139,28 +139,3 @@ const agregarProducto = async (e) =>{
         console.error(error);
     }
 }
-
-const obtencionDatosPorID =  async (id) =>{
-    try {
-        const res = await fetch(`http://localhost:3030/productos/${id}`)
-
-        if(!res.ok){
-            throw new Error (`Lo sensimos ${res.statusText}`)
-        }
-
-        const datosProducto = await res.json();
-
-        console.log(datosProducto)
-
-        document.getElementById('inputID').value = datosProducto.PRODUCTOS.ID_PRODUCTO;
-        document.getElementById('nombre').value = datosProducto.PRODUCTOS.NOMBRE;
-        document.getElementById('categoria').value = datosProducto.PRODUCTOS.CATEGORIA;
-        document.getElementById('precio').value = datosProducto.PRODUCTOS.PRECIO;
-        document.getElementById('cantidad').value = datosProducto.PRODUCTOS.CANTIDAD;
-        document.getElementById('imagen').value =datosProducto.PRODUCTOS.URL_IMAGEN;
-        console.log('probando')
-        console.log(datosProducto)
-    } catch (error) {
-        console.log(`Lo sentimos por el error: ${error}`);
-    }
-}

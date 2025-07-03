@@ -1,3 +1,4 @@
+
 document.addEventListener("DOMContentLoaded", () => {
     cargarProductosListado();
 });
@@ -56,7 +57,7 @@ function generarTabla(productos) {
                 </span>
             </td>
             <td>
-                <button class="btn btn-warning btn-sm me-2 id="btnEditar" onclick='editarProducto(${JSON.stringify(p)})'>
+                <button class="btn btn-warning btn-sm me-2 id="btnEditar" onclick='obtencionDatosPorID(${p.ID_PRODUCTO})'>
                 <i class="bi bi-pencil-square"></i> Editar
                 </button>
                 <button id="btnEliminar" class="btn btn-danger btn-sm" onclick='eliminarProducto(${p.ID_PRODUCTO})'>
@@ -74,4 +75,28 @@ function generarTabla(productos) {
 
 }
 
+const obtencionDatosPorID =  async (id) =>{
+    try {
+        const res = await fetch(`http://localhost:3030/productos/${id}`)
+
+        if(!res.ok){
+            throw new Error (`Lo sensimos ${res.statusText}`)
+        }
+
+        const datosProducto = await res.json();
+
+        console.log(datosProducto)
+
+        document.getElementById('id').value = datosProducto.ID_PRODUCTO;
+        document.getElementById('nombre').value = datosProducto.NOMBRE;
+        document.getElementById('categoria').checked = datosProducto.CATEGORIA;
+        document.getElementById('descripcion').value = datosProducto.DESCRIPCION;
+        document.getElementById('precio').value = datosProducto.PRECIO;
+        document.getElementById('cantidad').value = datosProducto.CANTIDAD;
+        document.getElementById('imagenActual').src = datosProducto.URL_IMAGEN;
+        console.log('probando')
+    } catch (error) {
+        console.log(`Lo sentimos por el error:${error.statusText}`);
+    }
+}
 
