@@ -82,14 +82,26 @@ const obtencionDatosPorID =  async (id) =>{
         if(!res.ok){
             throw new Error (`Lo sensimos ${res.statusText}`)
         }
+        const idTipos = {
+            Juegos : 1,
+            Creditos :2
+        }
 
         const datosProducto = await res.json();
+
+        if(datosProducto.ID_TIPO == 1){
+            categoria = 'Juegos'
+        }else{
+            categoria='Creditos'
+        }
+
+        
+        document.getElementById('categoria').value = categoria;
 
         console.log(datosProducto)
 
         document.getElementById('id').value = datosProducto.ID_PRODUCTO;
         document.getElementById('nombre').value = datosProducto.NOMBRE;
-        document.getElementById('categoria').checked = datosProducto.CATEGORIA;
         document.getElementById('descripcion').value = datosProducto.DESCRIPCION;
         document.getElementById('precio').value = datosProducto.PRECIO;
         document.getElementById('cantidad').value = datosProducto.CANTIDAD;
