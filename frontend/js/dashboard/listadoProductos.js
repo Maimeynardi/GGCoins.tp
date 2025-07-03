@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  cargarProductosListado();
+    cargarProductosListado();
 });
 
 async function cargarProductosListado() {
