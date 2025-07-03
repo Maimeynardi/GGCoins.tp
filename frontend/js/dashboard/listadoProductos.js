@@ -94,7 +94,7 @@ const obtencionDatosPorID =  async (id) =>{
         document.getElementById('precio').value = datosProducto.PRECIO;
         document.getElementById('cantidad').value = datosProducto.CANTIDAD;
         document.getElementById('imagenActual').src = datosProducto.URL_IMAGEN;
-        console.log('probando')
+        console.log(datosProducto.URL_IMAGEN)
     } catch (error) {
         console.log(`Lo sentimos por el error:${error.statusText}`);
     }
