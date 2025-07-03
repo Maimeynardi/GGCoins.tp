@@ -71,4 +71,7 @@ function generarTabla(productos) {
         divListado.innerHTML = html;
 
     }, 700);
-    }
+
+}
+
+
