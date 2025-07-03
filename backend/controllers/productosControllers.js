@@ -48,22 +48,24 @@ const crearProducto = async (req, res) => {
 };
 
 
-const eliminarProducto = async (req,res)=>{
+const eliminarProducto = async (req, res) => {
     try {
-        const productoEliminado = await PRODUCTOS.update({
-            WHERE:{id:req.params.id}
-        })
-        res.json(productoEliminado);
+        const productoEliminado = await PRODUCTOS.update(
+            { ACTIVO: false },
+            {
+                where: { id: req.params.id }
+            }
+        );
+        res.json({ message: 'Producto desactivado correctamente', resultado: productoEliminado });
     } catch (error) {
-        res.json({message:error.message})
-
+        res.status(500).json({ message: error.message });
     }
-}
+};
+
 
 const modificarProducto = async (req, res) => {
     try {
         const productoModificado = await PRODUCTOS.update(
-            { ACTIVO: false }, 
             { where: { id: req.params.id } } 
         );
         res.json(productoModificado);
