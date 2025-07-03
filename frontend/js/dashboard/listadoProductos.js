@@ -56,10 +56,10 @@ function generarTabla(productos) {
                 </span>
             </td>
             <td>
-                <button class="btn btn-warning btn-sm me-2" onclick='editarProducto(${JSON.stringify(p)})'>
+                <button class="btn btn-warning btn-sm me-2 id="btnEditar" onclick='editarProducto(${JSON.stringify(p)})'>
                 <i class="bi bi-pencil-square"></i> Editar
                 </button>
-                <button class="btn btn-danger btn-sm" onclick='eliminarProducto(${p.ID_PRODUCTO})'>
+                <button id="btnEliminar" class="btn btn-danger btn-sm" onclick='eliminarProducto(${p.ID_PRODUCTO})'>
                 <i class="bi bi-trash"></i> Eliminar
                 </button>
             </td>
