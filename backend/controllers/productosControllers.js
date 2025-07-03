@@ -56,6 +56,11 @@ const eliminarProducto = async (req, res) => {
                 where: { id: req.params.id }
             }
         );
+
+        if (productoEliminado[0] === 0) {
+            return res.status(404).json({ message: 'Producto no encontrado o ya estaba desactivado' });
+        }
+        
         res.json({ message: 'Producto desactivado correctamente', resultado: productoEliminado });
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -66,9 +71,17 @@ const eliminarProducto = async (req, res) => {
 const modificarProducto = async (req, res) => {
     try {
         const productoModificado = await PRODUCTOS.update(
-            { where: { id: req.params.id } } 
+            req.body,
+            { 
+                where: { ID_PRODUCTO: req.params.id } 
+            } 
         );
-        res.json(productoModificado);
+        //Sequelize nos devuelve un array  el valor 0 indica que no se modifico nada, el valor 1 que se ha modificado
+        if (productoModificado[0] === 0) {
+            return res.status(404).json({ message: 'Producto no encontrado o sin cambios' });
+        }
+
+        res.json({message:'Producto modificado Correctamente'});
     } catch (error) {
         res.json({ message: error.message });
     }
