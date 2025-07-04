@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>GG Coins</title>
+
+    <link rel="shortcut icon" href="/GGCoins.tp/frontend/img/logo.png" type="image/x-icon">
+
+    <link rel="stylesheet" href="/GGCoins.tp/frontend/css/styles.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">
+                <img src="/GGCoins.tp/frontend/img/logo.png" alt="Bootstrap" width="50" height="50">
+                <span class="gg-text">GG Coins</span>
+                </a>
+
+                <div class="d-flex align-items-center gap-3 ms-auto">
+                    <a href="bienvenida.html" class="btn btn-outline-light rounded-pill d-flex align-items-center gap-2">
+                        <i class="bi bi-house-fill"></i> Inicio
+                    </a>
+
+                    <a href="productos.html" class="btn btn-outline-light rounded-pill d-flex align-items-center gap-2">
+                        <i class="bi bi-shop"></i>  Productos
+                    </a>
+
+                    <button id="modoOscuroBtn" class="btn-dark-mode">
+                        <i class="bi bi-moon"></i>
+                    </button>
+                </div>
+            </div>  
+        </nav>
+    </header>
+            
+
+    <main class="container my-5 py-5">
+        <h2 class="text-center mb-5 text-white">🛒 Tu carrito</h2>
+
+        
+        <div id="carrito-lista" class="mb-5">
+
+            
+            <div class="card mb-3 p-3 producto-card d-flex align-items-center flex-row gap-3 justify-content-between">
+                <div class="d-flex align-items-center gap-3">
+                    <img src="./img/producto1.png" alt="Producto 1" class="producto-imagen"/>
+                    
+                    <div>
+                        <h5 class="mb-1">Producto 1</h5>
+                        <p class="mb-1 small">Precio unitario: $<span class="precio">250</span></p>
+                    </div>
+                </div>
+                
+                <div class="d-flex align-items-center gap-2 cantidad-control">
+                    <button class="btn btn-outline-light btn-restar">-</button>
+                    <input type="text" class="form-control text-center bg-transparent text-white cantidad-input" value="2" readonly>
+                    <button class="btn btn-outline-light btn-sumar">+</button>
+
+                    <span class="fw-semibold text-white ms-3">$<span class="subtotal">500.00</span>
+                </div>
+
+                    <button class="btn btn-danger">Eliminar</button>
+            </div>
+
+        </div>
+
+        <div class="text-end">
+            <h4 class="text-white">Total: $<span id="carrito-total"></span></h4>
+            <button class="btn btn-success mt-3">Finalizar compra</button>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
+</body>
+</html>
