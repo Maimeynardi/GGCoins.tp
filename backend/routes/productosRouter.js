@@ -1,5 +1,4 @@
 const express = require('express');
-
 const router  = express.Router();
 
 
@@ -12,9 +11,12 @@ router.get('/',obtenerProductos);
 
 router.post('/crearProducto', upload.single('imagen'), crearProducto);
 
+router.put('/:id', upload.single('imagen'), modificarProducto);
+//comentar el de abajo es el original
+//router.put('/:id',modificarProducto);
+
 router.delete('/:id',verificarToken,Admin,eliminarProducto);
 
-router.post('/:id',verificarToken,Admin,modificarProducto);
 
 router.get('/:id',obtenerProductoPorID);
 

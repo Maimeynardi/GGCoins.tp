@@ -1,6 +1,7 @@
 
 document.addEventListener("DOMContentLoaded", () => {
     cargarProductosListado();
+    document.getElementById('btnGuardarModificacion').addEventListener('submit',modificarDatos)
 });
 
 async function cargarProductosListado() {
@@ -11,7 +12,7 @@ async function cargarProductosListado() {
     } catch (error) {
         console.error("Error al cargar productos", error);
     }
-    }
+}
 
 function generarTabla(productos) {
     const divListado = document.getElementById("divListado");
@@ -105,7 +106,6 @@ const obtencionDatosPorID =  async (id) =>{
         document.getElementById('descripcion').value = datosProducto.DESCRIPCION;
         document.getElementById('precio').value = datosProducto.PRECIO;
         document.getElementById('cantidad').value = datosProducto.CANTIDAD;
-        document.getElementById('imagenActual').src = datosProducto.URL_IMAGEN;
         document.getElementById('imagenActual').src = `http://localhost:3030/${datosProducto.URL_IMAGE}`
 
     } catch (error) {
@@ -113,3 +113,29 @@ const obtencionDatosPorID =  async (id) =>{
     }
 }
 
+
+
+const modificarDatos = async (e) =>{
+
+    e.preventDefault();
+
+    const form = document.getElementById("modificarProductoForm");
+    const formData = new FormData(form);
+    const id = formData.get('id');
+    console.log(formData)
+    try {
+        const res = await fetch(`http://localhost:3030/productos/${id}`,{
+        method:'PUT',
+        body: formData
+        })
+
+        if(!res.ok){
+            throw new Error(`Erros al modificar el Dato ${res.statusText}`);
+        }
+        cargarProductosListado();
+        alert(`Producto con datos Modificados Agregada`);
+    
+    } catch (error) {
+        alert(`Lo sentimos por el error ${error}`)
+    }
+}
