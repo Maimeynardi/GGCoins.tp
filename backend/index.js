@@ -30,7 +30,7 @@ const authRouter = require('./routes/authRouter.js');
 app.use('/productos',productosRouter)
 app.use('/usuarios',usuariosRouter)
 app.use('/', authRouter);
-app.use('/imagenes/uploads', express.static('imagenes/uploads'));
+app.use('/uploads', express.static('uploads'));
 
 
 

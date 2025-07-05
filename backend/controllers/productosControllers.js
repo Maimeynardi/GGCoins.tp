@@ -28,7 +28,7 @@ const crearProducto = async (req, res) => {
 
         const { nombre, descripcion, ID_TIPO, precio, cantidad } = req.body;
 
-        const URL_IMAGEN = `/imagenes/uploads/${req.file.filename}`;
+        const URL_IMAGEN = `/uploads/${req.file.filename}`;
 
         const nuevoProducto = await PRODUCTOS.create({
             NOMBRE: nombre,
@@ -83,7 +83,7 @@ const modificarProducto = async (req, res) => {
 
         //  Si subieron una nueva imagen, le agregás la URL
         if (req.file) {
-            updateData.URL_IMAGEN = `imagenes/uploads/${req.file.filename}`;
+            updateData.URL_IMAGEN = `/uploads/${req.file.filename}`;
         }
 
         // Ahora sí ejecutás el update de Sequelize
