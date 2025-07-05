@@ -6,7 +6,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
 async function cargarProductosListado() {
     try {
-        const res = await fetch("http://localhost:3030/productos/admin/todos");
+        const token = localStorage.getItem("token");
+        const res = await fetch("http://localhost:3030/productos/admin/todos",
+            {
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                }
+            }
+        );
         const productos = await res.json();
         generarTabla(productos);
     } catch (error) {
@@ -89,7 +96,14 @@ function generarTabla(productos) {
 
 const obtencionDatosPorID =  async (id) =>{
     try {
-        const res = await fetch(`http://localhost:3030/productos/${id}`)
+        const token = localStorage.getItem('token');
+        const res = await fetch(`http://localhost:3030/productos/${id}`,
+        {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        }
+        )
 
         if(!res.ok){
             throw new Error (`Lo sensimos ${res.statusText}`)
@@ -135,8 +149,12 @@ const modificarDatos = async (e) =>{
     const id = formData.get('id');
     console.log(formData)
     try {
+        const token = localStorage.getItem("token");
         const res = await fetch(`http://localhost:3030/productos/${id}`,{
         method:'PUT',
+        headers: {
+            'Authorization': `Bearer ${token}`
+        },
         body: formData
         })
 
@@ -156,8 +174,12 @@ const eliminarProducto = async (id) => {
     if (!confirmar) return;
 
     try {
+        const token = localStorage.getItem("token");
         const res = await fetch(`http://localhost:3030/productos/${id}`, {
-            method: 'DELETE'
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
         });
 
         const data = await res.json();
@@ -179,11 +201,15 @@ const activarProducto = async (id) => {
     if (!confirmar) return;
 
     try {
+        const token = localStorage.getItem("token");
         const formData = new FormData();
         formData.append('activo', true);
 
         const res = await fetch(`http://localhost:3030/productos/${id}/activar`, {
             method: 'PUT',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            },
             body: formData
         });
 
