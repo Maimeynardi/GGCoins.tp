@@ -104,40 +104,47 @@ const validacionDatosIngresados = () =>{
 
 }
 
-const agregarProducto = async (e) =>{
+const agregarProducto = async (e) => {
     e.preventDefault();
 
-    if(!validacionDatosIngresados()){return;}
+    if(!validacionDatosIngresados()) return;
 
     const form = document.getElementById('altaProductoForm');
     const formData = new FormData(form);
 
     const idTipos = {
         Juegos : 1,
-        Creditos :2
-    }
+        Creditos : 2
+    };
 
     const categoria = document.getElementById('categoria').value;
-    const ID_TIPO = idTipos[categoria]
-
-    formData.append('ID_TIPO',ID_TIPO);
+    const ID_TIPO = idTipos[categoria];
+    formData.append('ID_TIPO', ID_TIPO);
 
     try {
-        const res = await fetch(`http://localhost:3030/productos/crearProducto`,{
-            method:'POST',
+        const token = localStorage.getItem("token"); 
+
+        const res = await fetch(`http://localhost:3030/productos/crearProducto`, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${token}` 
+            },
             body: formData
         });
 
-        if (!res.ok){
-            throw new Error(`Error:${res.statusText}`)
+        if (!res.ok) {
+            throw new Error(`Error: ${res.statusText}`);
         }
 
         const productoNuevo = await res.json();
-        console.log("Producto Creado: ",productoNuevo)
+        console.log("Producto Creado: ", productoNuevo);
+        alert("Producto agregado correctamente");
+
     } catch (error) {
-        alert('error al cargar el producto')
+        alert('Error al cargar el producto');
         console.error(error);
     }
-}
+};
 
-export {validacionDatosIngresados};
+
+// export {validacionDatosIngresados};

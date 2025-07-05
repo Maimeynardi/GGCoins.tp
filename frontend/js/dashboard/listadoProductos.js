@@ -53,7 +53,7 @@ function generarTabla(productos) {
             html += `
                 <tr class="${!p.ACTIVO ? 'table-secondary' : ''}">
                 <td>${p.ID_PRODUCTO}</td>
-                <td><img src="${p.URL_IMAGEN}" alt="${p.NOMBRE}" class="tabla-imagen"></td>
+                <td><img src="http://localhost:3030${p.URL_IMAGEN}" alt="${p.NOMBRE}" class="tabla-imagen" style="width: 70px; height: auto; object-fit: contain;"></td>
                 <td>${p.NOMBRE}</td>
                 <td>${p.DESCRIPCION}</td>
                 <td>$${p.PRECIO}</td>
@@ -131,8 +131,10 @@ const obtencionDatosPorID =  async (id) =>{
         document.getElementById('descripcion').value = datosProducto.DESCRIPCION;
         document.getElementById('precio').value = datosProducto.PRECIO;
         document.getElementById('cantidad').value = datosProducto.CANTIDAD;
-        document.getElementById('imagenActual').src = `http://localhost:3030/${datosProducto.URL_IMAGE}`
+        document.getElementById("imagenActual").src = `http://localhost:3030${datosProducto.URL_IMAGEN}`;
 
+
+        
     } catch (error) {
         console.log(`Lo sentimos por el error:${error.statusText}`);
     }
