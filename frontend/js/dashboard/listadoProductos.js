@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 async function cargarProductosListado() {
     try {
-        const res = await fetch("http://localhost:3030/productos");
+        const res = await fetch("http://localhost:3030/productos/admin/todos");
         const productos = await res.json();
         generarTabla(productos);
     } catch (error) {
@@ -43,38 +43,49 @@ function generarTabla(productos) {
         `;
 
         productos.forEach(p => {
-        html += `
-            <tr class="${!p.ACTIVO ? 'table-secondary' : ''}">
-            <td>${p.ID_PRODUCTO}</td>
-            <td><img src="${p.URL_IMAGEN}" alt="${p.NOMBRE}" class="tabla-imagen"></td>
-            <td>${p.NOMBRE}</td>
-            <td>${p.DESCRIPCION}</td>
-            <td>$${p.PRECIO}</td>
-            <td>${p.CANTIDAD}</td>
-            <td>${p.ID_TIPO}</td>
-            <td>
-                <span class="badge ${p.ACTIVO ? 'bg-success' : 'bg-danger'}">
-                ${p.ACTIVO ? 'Activo' : 'Inactivo'}
-                </span>
-            </td>
-            <td>
-                <button class="btn btn-warning btn-sm me-2 id="btnEditar" onclick='obtencionDatosPorID(${p.ID_PRODUCTO})'>
-                <i class="bi bi-pencil-square"></i> Editar
-                </button>
-                <button id="btnEliminar" class="btn btn-danger btn-sm" onclick='eliminarProducto(${p.ID_PRODUCTO})'>
-                <i class="bi bi-trash"></i> Eliminar
-                </button>
-            </td>
-            </tr>
-        `;
+            html += `
+                <tr class="${!p.ACTIVO ? 'table-secondary' : ''}">
+                <td>${p.ID_PRODUCTO}</td>
+                <td><img src="${p.URL_IMAGEN}" alt="${p.NOMBRE}" class="tabla-imagen"></td>
+                <td>${p.NOMBRE}</td>
+                <td>${p.DESCRIPCION}</td>
+                <td>$${p.PRECIO}</td>
+                <td>${p.CANTIDAD}</td>
+                <td>${p.ID_TIPO}</td>
+                <td>
+                    <span class="badge ${p.ACTIVO ? 'bg-success' : 'bg-danger'}">
+                    ${p.ACTIVO ? 'Activo' : 'Inactivo'}
+                    </span>
+                </td>
+                <td>
+                    <button class="btn btn-warning btn-sm me-2" onclick='obtencionDatosPorID(${p.ID_PRODUCTO})'>
+                        <i class="bi bi-pencil-square"></i> Editar
+                    </button>
+            `;
+
+            if (p.ACTIVO) {
+                html += `
+                    <button class="btn btn-danger btn-sm" onclick='eliminarProducto(${p.ID_PRODUCTO})'>
+                        <i class="bi bi-trash"></i> Eliminar
+                    </button>
+                `;
+            } else {
+                html += `
+                    <button class="btn btn-success btn-sm" onclick='activarProducto(${p.ID_PRODUCTO})'>
+                        <i class="bi bi-check-circle"></i> Activar
+                    </button>
+                `;
+            }
+
+            html += `</td></tr>`;
         });
 
         html += "</tbody></table>";
-        divListado.innerHTML = html;
+        divListado.innerHTML = html; 
 
     }, 700);
-
 }
+
 
 const obtencionDatosPorID =  async (id) =>{
     try {
@@ -139,3 +150,53 @@ const modificarDatos = async (e) =>{
         alert(`Lo sentimos por el error ${error}`)
     }
 }
+
+const eliminarProducto = async (id) => {
+    const confirmar = confirm("¿Estás seguro de que querés desactivar este producto?");
+    if (!confirmar) return;
+
+    try {
+        const res = await fetch(`http://localhost:3030/productos/${id}`, {
+            method: 'DELETE'
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+            throw new Error(data.message || 'Error al eliminar');
+        }
+
+        alert('Producto desactivado correctamente');
+        cargarProductosListado(); 
+    } catch (error) {
+        console.error('Error al eliminar producto:', error);
+        alert('Ocurrió un error al eliminar el producto.');
+    }
+};
+
+const activarProducto = async (id) => {
+    const confirmar = confirm("¿Estás seguro de que querés activar este producto?");
+    if (!confirmar) return;
+
+    try {
+        const formData = new FormData();
+        formData.append('activo', true);
+
+        const res = await fetch(`http://localhost:3030/productos/${id}/activar`, {
+            method: 'PUT',
+            body: formData
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+            throw new Error(data.message || 'Error al activar');
+        }
+
+        alert('Producto activado correctamente');
+        cargarProductosListado();
+    } catch (error) {
+        console.error('Error al activar producto:', error);
+        alert('Ocurrió un error al activar el producto.');
+    }
+};

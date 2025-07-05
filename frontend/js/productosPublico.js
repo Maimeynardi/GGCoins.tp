@@ -7,6 +7,7 @@ async function cargarProductos() {
         const productos = await obtenerProductos();
         limpiarContenedores();
         productos.forEach(producto => {
+            //if (!producto.ACTIVO) return;
             const card = crearCardProducto(producto);
             agregarCardAlContenedor(card, producto.ID_TIPO);
         });
