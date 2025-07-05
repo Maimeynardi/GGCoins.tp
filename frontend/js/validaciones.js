@@ -136,6 +136,8 @@ const agregarProducto = async (e) => {
             throw new Error(`Error: ${res.statusText}`);
         }
 
+        window.location.href = "dashboard.html"
+        
         const productoNuevo = await res.json();
         console.log("Producto Creado: ", productoNuevo);
         alert("Producto agregado correctamente");

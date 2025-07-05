@@ -11,6 +11,7 @@ async function cargarProductos() {
             const card = crearCardProducto(producto);
             agregarCardAlContenedor(card, producto.ID_TIPO);
         });
+        
     } catch (error) {
         console.error(error);
     }
@@ -64,8 +65,6 @@ function crearCardProducto(producto) {
         boton.addEventListener('click', () => {
             agregarProductoLocalStorage(producto);
     });
-
-
     return card;
 }
 

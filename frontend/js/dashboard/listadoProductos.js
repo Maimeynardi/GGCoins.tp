@@ -65,7 +65,7 @@ function generarTabla(productos) {
                     </span>
                 </td>
                 <td>
-                    <button class="btn btn-warning btn-sm me-2" onclick='obtencionDatosPorID(${p.ID_PRODUCTO})'>
+                    <button class="btn btn-warning btn-sm me-2" onclick="window.location.href='modificar.html?id=${p.ID_PRODUCTO}'">
                         <i class="bi bi-pencil-square"></i> Editar
                     </button>
             `;
@@ -94,82 +94,82 @@ function generarTabla(productos) {
 }
 
 
-const obtencionDatosPorID =  async (id) =>{
-    try {
-        const token = localStorage.getItem('token');
-        const res = await fetch(`http://localhost:3030/productos/${id}`,
-        {
-            headers: {
-                'Authorization': `Bearer ${token}`
-            }
-        }
-        )
+// const obtencionDatosPorID =  async (id) =>{
+//     try {
+//         const token = localStorage.getItem('token');
+//         const res = await fetch(`http://localhost:3030/productos/${id}`,
+//         {
+//             headers: {
+//                 'Authorization': `Bearer ${token}`
+//             }
+//         }
+//         )
 
-        if(!res.ok){
-            throw new Error (`Lo sensimos ${res.statusText}`)
-        }
-        const idTipos = {
-            Juegos : 1,
-            Creditos :2
-        }
+//         if(!res.ok){
+//             throw new Error (`Lo sentimos ${res.statusText}`)
+//         }
+//         const idTipos = {
+//             Juegos : 1,
+//             Creditos :2
+//         }
 
-        const datosProducto = await res.json();
+//         const datosProducto = await res.json();
 
-        if(datosProducto.ID_TIPO == 1){
-            categoria = 'Juegos'
-        }else{
-            categoria='Creditos'
-        }
-
-        
-        document.getElementById('categoria').value = categoria;
-
-        console.log(datosProducto)
-
-        document.getElementById('id').value = datosProducto.ID_PRODUCTO;
-        document.getElementById('nombre').value = datosProducto.NOMBRE;
-        document.getElementById('descripcion').value = datosProducto.DESCRIPCION;
-        document.getElementById('precio').value = datosProducto.PRECIO;
-        document.getElementById('cantidad').value = datosProducto.CANTIDAD;
-        document.getElementById("imagenActual").src = `http://localhost:3030${datosProducto.URL_IMAGEN}`;
-
+//         if(datosProducto.ID_TIPO == 1){
+//             categoria = 'Juegos'
+//         }else{
+//             categoria='Creditos'
+//         }
 
         
-    } catch (error) {
-        console.log(`Lo sentimos por el error:${error.statusText}`);
-    }
-}
+//         document.getElementById('categoria').value = categoria;
+
+//         console.log(datosProducto)
+
+//         document.getElementById('id').value = datosProducto.ID_PRODUCTO;
+//         document.getElementById('nombre').value = datosProducto.NOMBRE;
+//         document.getElementById('descripcion').value = datosProducto.DESCRIPCION;
+//         document.getElementById('precio').value = datosProducto.PRECIO;
+//         document.getElementById('cantidad').value = datosProducto.CANTIDAD;
+//         document.getElementById("imagenActual").src = `http://localhost:3030${datosProducto.URL_IMAGEN}`;
+
+
+        
+//     } catch (error) {
+//         console.log(`Lo sentimos por el error:${error.statusText}`);
+//     }
+// }
 
 
 
-const modificarDatos = async (e) =>{
+// const modificarDatos = async (e) =>{
 
-    e.preventDefault();
+//     e.preventDefault();
 
-    const form = document.getElementById("modificarProductoForm");
-    const formData = new FormData(form);
-    const id = formData.get('id');
-    console.log(formData)
-    try {
-        const token = localStorage.getItem("token");
-        const res = await fetch(`http://localhost:3030/productos/${id}`,{
-        method:'PUT',
-        headers: {
-            'Authorization': `Bearer ${token}`
-        },
-        body: formData
-        })
+//     const form = document.getElementById("modificarProductoForm");
+//     const formData = new FormData(form);
+//     const id = formData.get('id');
+//     console.log(formData)
+//     try {
+//         const token = localStorage.getItem("token");
+//         const res = await fetch(`http://localhost:3030/productos/${id}`,{
+//         method:'PUT',
+//         headers: {
+//             'Authorization': `Bearer ${token}`
+//         },
+//         body: formData
+//         })
 
-        if(!res.ok){
-            throw new Error(`Erros al modificar el Dato ${res.statusText}`);
-        }
-        cargarProductosListado();
-        alert(`Producto con datos Modificados Agregada`);
+//         if(!res.ok){
+//             throw new Error(`Erros al modificar el Dato ${res.statusText}`);
+//         }
+//         cargarProductosListado();
+//         alert(`Producto con datos Modificados Agregada`);
     
-    } catch (error) {
-        alert(`Lo sentimos por el error ${error}`)
-    }
-}
+//     } catch (error) {
+//         alert(`Lo sentimos por el error ${error}`)
+//     }
+// }
 
 const eliminarProducto = async (id) => {
     const confirmar = confirm("¿Estás seguro de que querés desactivar este producto?");
