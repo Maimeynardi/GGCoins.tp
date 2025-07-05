@@ -36,7 +36,7 @@ const ingresarCliente = async () => {
         alert(`Bienvenido ${data.usuario.NOMBRE}`);
 
         // Redirigir a otra página si querés
-        // window.location.href = "/GGCoins.tp/frontend/admin.html";
+        window.location.href = "/GGCoins.tp/frontend/admin-html/menuAdmin.html";
     } catch (error) {
         console.error('Error al iniciar sesión:', error);
     }
