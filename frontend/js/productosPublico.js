@@ -23,7 +23,18 @@ async function obtenerProductos() {
     return productos;
 }
 
+function agregarCardAlContenedor(card, idTipo) {
+    if (idTipo === 1) {
+        document.getElementById('contenedor-juegos').appendChild(card);
+    } else if (idTipo === 2) {
+        document.getElementById('contenedor-creditos').appendChild(card);
+    }
+}
 
+function limpiarContenedores() {
+    document.getElementById('contenedor-juegos').innerHTML = '';
+    document.getElementById('contenedor-creditos').innerHTML = '';
+}
 
 function crearCardProducto(producto) {
     const card = document.createElement('div');
@@ -42,25 +53,53 @@ function crearCardProducto(producto) {
             <div class="card-body text-center">
                 <h5 class="card-title mb-1">${producto.NOMBRE}</h5>
                 <p class="precio fw-semibold">ARS ${producto.PRECIO.toLocaleString()}</p>
-                <button class="btn-agregar-carrito">
+                <button class="btn-agregar-carrito" type='button' id='agregarCarrito'>
                     <i class="bi bi-cart-plus me-2"></i> Agregar al carrito
                 </button>
             </div>
         </div>
     `;
 
+    const boton = card.querySelector('.btn-agregar-carrito');
+        boton.addEventListener('click', () => {
+            agregarProductoLocalStorage(producto);
+    });
+
+
     return card;
 }
 
-function agregarCardAlContenedor(card, idTipo) {
-    if (idTipo === 1) {
-        document.getElementById('contenedor-juegos').appendChild(card);
-    } else if (idTipo === 2) {
-        document.getElementById('contenedor-creditos').appendChild(card);
+
+const agregarProductoLocalStorage = (producto) => {
+
+    let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+
+    let productoExistente = carrito.find(item => item.ID_PRODUCTO === producto.ID_PRODUCTO);
+
+    if (productoExistente) {
+        if (productoExistente.cantidad < producto.CANTIDAD) {
+            productoExistente.cantidad += 1;
+        } else {
+            alert(`No hay más stock disponible para "${producto.NOMBRE}".`);
+            return;
+        }
+    } else {
+        if (producto.CANTIDAD > 0) {
+            carrito.push({
+                ID_PRODUCTO: producto.ID_PRODUCTO,
+                NOMBRE: producto.NOMBRE,
+                PRECIO: producto.PRECIO,
+                URL_IMAGEN: producto.URL_IMAGEN,
+                cantidad: 1,
+                stock: producto.CANTIDAD //  referencia
+            });
+        } else {
+            alert(`"${producto.NOMBRE}" no tiene stock disponible.`);
+            return;
+        }
     }
+
+    localStorage.setItem('carrito', JSON.stringify(carrito));
+    alert(`${producto.NOMBRE} agregado al carrito`);
 }
 
-function limpiarContenedores() {
-    document.getElementById('contenedor-juegos').innerHTML = '';
-    document.getElementById('contenedor-creditos').innerHTML = '';
-}
