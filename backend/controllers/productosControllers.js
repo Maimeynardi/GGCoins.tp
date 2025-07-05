@@ -53,7 +53,7 @@ const eliminarProducto = async (req, res) => {
         const productoEliminado = await PRODUCTOS.update(
             { ACTIVO: false },
             {
-                where: { id: req.params.id }
+                where: { ID_PRODUCTO: req.params.id }
             }
         );
 
@@ -72,7 +72,7 @@ const modificarProducto = async (req, res) => {
         const id = req.params.id;
         const { nombre, descripcion, categoria, cantidad, precio } = req.body;
 
-        // 1) Armás el objeto con los datos que vienen del form
+        // Armás el objeto con los datos que vienen del form
         const updateData = {
             NOMBRE: nombre,
             DESCRIPCION: descripcion,
@@ -81,12 +81,12 @@ const modificarProducto = async (req, res) => {
             PRECIO: parseFloat(precio)
         };
 
-        // 2) Si subieron una nueva imagen, le agregás la URL
+        //  Si subieron una nueva imagen, le agregás la URL
         if (req.file) {
             updateData.URL_IMAGEN = `imagenes/uploads/${req.file.filename}`;
         }
 
-        // 3) Ahora sí ejecutás el update de Sequelize
+        // Ahora sí ejecutás el update de Sequelize
         const [modCount] = await PRODUCTOS.update(updateData, {
             where: { ID_PRODUCTO: id }
         });
@@ -99,29 +99,6 @@ const modificarProducto = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 };
-
-/* const modificarProducto = async (req, res) => {
-    try {
-        const productoModificado = await PRODUCTOS.update(
-            req.body,
-            { 
-                where: { ID_PRODUCTO: req.params.id } 
-            } 
-        );
-
-        if (req.file) {
-            nuevoProducto.URL_IMAGEN = `/uploads/${req.file.filename}`; // esta ruta será usada en el frontend
-        }
-        //Sequelize nos devuelve un array  el valor 0 indica que no se modifico nada, el valor 1 que se ha modificado
-        if (productoModificado[0] === 0) {
-            return res.status(404).json({ message: 'Producto no encontrado o sin cambios' });
-        }
-
-        res.json({message:'Producto modificado Correctamente'});
-    } catch (error) {
-        res.json({ message: error.message });
-    }
-}; */
 
 const obtenerProductoPorCategoria = async (req,res)=>{
 
@@ -140,11 +117,42 @@ const obtenerProductoPorCategoria = async (req,res)=>{
     }
 } 
 
+const obtenerTodosLosProductos = async (req, res) => {
+    try {
+        const productos = await PRODUCTOS.findAll();
+        res.json(productos);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+const activarProducto = async (req, res) => {
+    try {
+        const productoActivado = await PRODUCTOS.update(
+            { ACTIVO: true },
+            {
+                where: { ID_PRODUCTO: req.params.id }
+            }
+        );
+
+        if (productoActivado[0] === 0) {
+            return res.status(404).json({ message: 'Producto no encontrado o ya estaba activado' });
+        }
+
+        res.json({ message: 'Producto activado correctamente', resultado: productoActivado });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+
 module.exports = {
     obtenerProductos,
     obtenerProductoPorID,
     crearProducto,
     eliminarProducto,
     modificarProducto,
-    obtenerProductoPorCategoria
+    obtenerProductoPorCategoria,
+    obtenerTodosLosProductos,
+    activarProducto
 }
