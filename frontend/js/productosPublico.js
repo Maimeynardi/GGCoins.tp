@@ -91,8 +91,9 @@ const agregarProductoLocalStorage = (producto) => {
                 PRECIO: producto.PRECIO,
                 URL_IMAGEN: producto.URL_IMAGEN,
                 cantidad: 1,
-                stock: producto.CANTIDAD //  referencia
             });
+        
+
         } else {
             alert(`"${producto.NOMBRE}" no tiene stock disponible.`);
             return;
