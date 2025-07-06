@@ -99,6 +99,5 @@ const restarCantidadPorID = async (idProducto) =>{
         if (indiceDelProducto !== -1) {
         carrito.splice(indiceDelProducto, 1);
 }
-
-    }
+}
 }
