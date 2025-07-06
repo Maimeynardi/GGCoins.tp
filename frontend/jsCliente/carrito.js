@@ -10,8 +10,8 @@ const crearTarjetasDeCadaProducto = () =>{
     contenedorTarjetas.innerHTML = ` `;
 
 
-    if(carrito.lenght >0){
-        carrito.array.forEach(element => {
+    if(carrito.length >0){
+        carrito.forEach(element => { //saque el .array
             contenedorTarjetas.innerHTML +=`
 
             <div class="card mb-3 p-3 producto-card d-flex align-items-center flex-row gap-3 justify-content-between">
@@ -41,6 +41,8 @@ const crearTarjetasDeCadaProducto = () =>{
         });
     }
 }
+
+
 
 const activarEventosCantidad = () => {
     const botonesSumar = document.querySelectorAll('.btn-sumar');
@@ -101,3 +103,4 @@ const restarCantidadPorID = async (idProducto) =>{
 }
 }
 }
+

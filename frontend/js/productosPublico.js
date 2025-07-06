@@ -54,7 +54,7 @@ function crearCardProducto(producto) {
             <div class="card-body text-center">
                 <h5 class="card-title mb-1">${producto.NOMBRE}</h5>
                 <p class="precio fw-semibold">ARS ${producto.PRECIO.toLocaleString()}</p>
-                <button class="btn-agregar-carrito" type='button' id='agregarCarrito'>
+                <button class="btn-agregar-carrito" type='button' id='agregarCarrito' onclick='agregarAlCarrito(${JSON.stringify(producto)})'>
                     <i class="bi bi-cart-plus me-2"></i> Agregar al carrito
                 </button>
             </div>
@@ -63,13 +63,15 @@ function crearCardProducto(producto) {
 
     const boton = card.querySelector('.btn-agregar-carrito');
         boton.addEventListener('click', () => {
-            agregarProductoLocalStorage(producto);
-    });
+            agregarAlCarrito(producto);
+});
+
     return card;
 }
 
 
-const agregarProductoLocalStorage = (producto) => {
+
+const agregarAlCarrito = (producto) => {
 
     let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
 
@@ -83,20 +85,14 @@ const agregarProductoLocalStorage = (producto) => {
             return;
         }
     } else {
-        if (producto.CANTIDAD > 0) {
             carrito.push({
                 ID_PRODUCTO: producto.ID_PRODUCTO,
                 NOMBRE: producto.NOMBRE,
                 PRECIO: producto.PRECIO,
                 URL_IMAGEN: producto.URL_IMAGEN,
-                cantidad: 1,
+                CANTIDAD: 1,
             });
         
-
-        } else {
-            alert(`"${producto.NOMBRE}" no tiene stock disponible.`);
-            return;
-        }
     }
 
     localStorage.setItem('carrito', JSON.stringify(carrito));
