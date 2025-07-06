@@ -1,106 +1,96 @@
-document.addEventListener('DOMContentLoaded', () => {
-
-
+document.addEventListener('DOMContentLoaded', async () => {
+    crearTarjetasDeCadaProducto();
 });
 
-const crearTarjetasDeCadaProducto = () =>{
+const obtenerProductos = async () => {
+    const res = await fetch("http://localhost:3030/productos");
+    const productos = await res.json();
+    return productos;
+};
 
+const crearTarjetasDeCadaProducto = async () => {
     const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
-    let contenedorTarjetas = document.getElementById('carrito-lista');
-    contenedorTarjetas.innerHTML = ` `;
+    const contenedor = document.getElementById('carrito-lista');
+    const totalSpan = document.getElementById('carrito-total');
+    contenedor.innerHTML = '';
+    let total = 0;
 
+    carrito.forEach(producto => {
+    const subtotal = producto.PRECIO * producto.CANTIDAD;
+    total += subtotal;
 
-    if(carrito.length >0){
-        carrito.forEach(element => { //saque el .array
-            contenedorTarjetas.innerHTML +=`
-
-            <div class="card mb-3 p-3 producto-card d-flex align-items-center flex-row gap-3 justify-content-between">
-                <div class="d-flex align-items-center gap-3">
-                    <img src="${element.URL_IMAGEN}" alt="${element.NOMBRE}" class="producto-imagen"/>
-
-            <div>
-            <h5 class='mb-1'>${element.NOMBRE}</h5>
-            <p class="mb-1 small">Precio unitario: $<span class="precio">${element.PRECIO}</span></p>
+    contenedor.innerHTML += `
+        <div class="card mb-3 p-3 d-flex align-items-center flex-row justify-content-between">
+            <div class="d-flex align-items-center gap-3">
+                <img src="http://localhost:3030${producto.URL_IMAGEN}" alt="${producto.NOMBRE}" style="width: 60px; height: auto;">
+                <div>
+                    <h5 class='mb-1 text-white'>${producto.NOMBRE}</h5>
+                    <p class="mb-1 text-white">Precio: $${producto.PRECIO}</p>
+                    <p class="mb-1 text-white">Subtotal: $<span class="subtotal">${subtotal}</span></p>
+                </div>
             </div>
 
-            <div class="d-flex align-items-center gap-2 cantidad-control">
-                <button class="btn btn-outline-light btn-restar" data-id ='${element.ID_PRODUCTO}'>-</button>
-                <input type="text" class="form-control text-center bg-transparent text-white cantidad-input" value="${element.CANTIDAD}" readonly>
-
-        /*                data-id es un atributo personalizado de HTML que forma parte de los llamados "data attributes". Se usa para guardar información adicional directamente en un elemento del DOM, sin que esa info se vea ni interfiera con el estilo o funcionalidad base. 
-        
-        */
-
-
-                <button class="btn btn-outline-light btn-sumar" data-id ='${element.ID_PRODUCTO}'>+</button>
-
-                <span class="fw-semibold text-white ms-3">$<span class="subtotal">${element.CANTIDAD * element.PRECIO}</span>
+            <div class="d-flex align-items-center gap-2">
+                <button class="btn btn-outline-light btn-restar" data-id="${producto.ID_PRODUCTO}">-</button>
+                <input type="text" class="form-control text-center bg-transparent text-white cantidad-input" value="${producto.CANTIDAD}" readonly>
+                <button class="btn btn-outline-light btn-sumar" data-id="${producto.ID_PRODUCTO}">+</button>
+                <button class="btn btn-danger btn-eliminar" data-id="${producto.ID_PRODUCTO}">
+                    <i class="bi bi-trash"></i>
+                </button>
             </div>
-
-            `
-        });
-    }
-}
+        </div>
+    `;
+});
 
 
+    totalSpan.textContent = total;
+    activarEventosCantidad();
+};
 
 const activarEventosCantidad = () => {
-    const botonesSumar = document.querySelectorAll('.btn-sumar');
-    const botonesRestar = document.querySelectorAll('.btn-restar');
-
-    botonesSumar.forEach((boton) => {
-        boton.addEventListener('click', () => {
-            //AHORA PARA UTILIZAR EL DATA-ID LO QUE HACEMOS ES UTILIZAR LA PROPIEDAD
-            //.DATASET QUE ES UN OBJETO CON TODAS LAS PROPIEDAS QUE COMIENTAN CON DATA
-            //Es un objeto que contiene todas las propiedades data-* del elemento como claves:
-            //Todo lo que viene desde dataset es texto (string)
-            const id = parseInt(boton.dataset.id);
-            sumarCantidadPorId(id);
+    document.querySelectorAll('.btn-sumar').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const id = parseInt(btn.dataset.id);
+            modificarCantidad(id, 1);
         });
     });
 
-    botonesRestar.forEach((boton) => {
-        boton.addEventListener('click', () => {
-            const id = parseInt(boton.dataset.id);
-            restarCantidadPorId(id);
+    document.querySelectorAll('.btn-restar').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const id = parseInt(btn.dataset.id);
+            modificarCantidad(id, -1);
+        });
+    });
+
+    document.querySelectorAll('.btn-eliminar').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const id = parseInt(btn.dataset.id);
+            eliminarProductoDelCarrito(id);
         });
     });
 };
 
-const sumarCantidadPorID = async (idProducto) =>{
-    const carrito = JSON.parse(localStorage.getItem('carrito')) || []
-    const productos = await obtenerProductos();
-
-    //Esa línea no nos devuelve una copia, lo que nos da es una referencia directa al objeto dentro del array carrito.
-
-    const productoDelCarrito = carrito.find(producto =>producto.ID_PRODUCTO === idProducto);
-    const productoDeLaBD = productos.find(productoBase => productoBase.ID_PRODUCTO === idProducto);
-
-    if(productoDelCarrito.cantidad < productoDeLaBD.CANTIDAD){
-        productoDelCarrito +=1;
-        //Entonces, con esa referencia lo que hacemos es modificar directamente el objeto que ya está dentro del array
-        localStorage.setItem('carrito',JSON.stringify(carrito));
-    }else{
-        alert('No tenemos mas stock del mismo producto')
-    }
-}
-
-const restarCantidadPorID = async (idProducto) =>{
+const modificarCantidad = (idProducto, cambio) => {
     const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
-    const productosBase = await obtenerProductos();
+    const indiceCarrito = carrito.findIndex(p => p.ID_PRODUCTO === idProducto);
 
-    const productoDelCarrito = carrito.find(producto => producto.ID_PRODUCTO ===idProducto);
-    const productoBaseDeLaBD = productosBase.find(producto =>producto.ID_PRODUCTO === idProducto);
+    if (indiceCarrito !== -1) {
+        carrito[indiceCarrito].CANTIDAD += cambio;
 
-    if( productoDelCarrito.CANTIDAD>1){
-        productoDelCarrito.CANTIDAD =- 1;
-        localStorage.setItem('carrito',JSON.stringify(carrito));
-    }else{
-        const indiceDelProducto = carrito.findIndex(producto =>producto.ID_PRODUCTO === idProducto);
-        //si lo encuentra
-        if (indiceDelProducto !== -1) {
-        carrito.splice(indiceDelProducto, 1);
-}
-}
-}
+        if (carrito[indiceCarrito].CANTIDAD < 1) {
+            carrito.splice(indiceCarrito, 1);
+        }
+
+        localStorage.setItem('carrito', JSON.stringify(carrito));
+        crearTarjetasDeCadaProducto();
+    }
+};
+
+const eliminarProductoDelCarrito = (idProducto) => {
+    const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+    const nuevoCarrito = carrito.filter(p => p.ID_PRODUCTO !== idProducto);
+    localStorage.setItem('carrito', JSON.stringify(nuevoCarrito));
+    crearTarjetasDeCadaProducto();
+};
+
 
