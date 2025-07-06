@@ -3,10 +3,10 @@ const DETALLE_VENTA = require('../models/detalle_venta');
 
 const crearVentaConDetalles = async (req, res) => {
     try {
-        const { NombreUsuario, productos } = req.body;
+        console.log(req.body);
+        const { NOMBRE_CLIENTE, productos } = req.body;
+        const venta = await VENTAS.create({ NOMBRE_CLIENTE });
 
-        // 1. Crear la venta
-        const venta = await VENTAS.create({ NombreUsuario });
 
         // 2. Crear los detalles de la venta
         for (const p of productos) {

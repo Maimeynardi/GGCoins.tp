@@ -73,6 +73,7 @@ const activarEventosCantidad = () => {
 
 const modificarCantidad = (idProducto, cambio) => {
     const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+    
     const indiceCarrito = carrito.findIndex(p => p.ID_PRODUCTO === idProducto);
 
     if (indiceCarrito !== -1) {
@@ -96,7 +97,7 @@ const eliminarProductoDelCarrito = (idProducto) => {
 
 
 async function finalizarCompra() {
-    const nombreCliente = localStorage.getItem("NombreUsuario") || "Cliente";
+    const nombreCliente = localStorage.getItem("nombreUsuario") || "Cliente";
     const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
 
     if (!carrito.length) {
@@ -104,25 +105,28 @@ async function finalizarCompra() {
         return;
     }
 
+    // Adaptamos los productos al formato que espera el backend
+    const productos = carrito.map(p => ({
+        ID_PRODUCTO: p.ID_PRODUCTO,
+        CANTIDAD: p.CANTIDAD,
+        PRECIO_UNITARIO: p.PRECIO
+    }));
+
     const venta = {
         NOMBRE_CLIENTE: nombreCliente,
-        productos: carrito
+        productos
     };
 
-    console.log(venta);
-    
     try {
-        const res = await fetch("http://localhost:3030/ventas/crear", {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(venta)
-        });
-
+    await fetch("http://localhost:3030/ventas/crear", {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(venta)
+    });
         if (!res.ok) throw new Error("Error al guardar la venta");
 
-        // ✅ Ahora que la venta se guardó, redirigimos
         window.location.href = "/GGCoins.tp/frontend/cliente-html/ticket.html";
 
     } catch (error) {
@@ -130,3 +134,4 @@ async function finalizarCompra() {
         alert("Ocurrió un error al guardar el ticket.");
     }
 }
+
