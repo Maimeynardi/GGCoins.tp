@@ -15,13 +15,8 @@ TIPOS_PRODUCTO.hasMany(PRODUCTOS,{foreignKey:'ID_TIPO'});
 PRODUCTOS.belongsTo(TIPOS_PRODUCTO,{foreignKey:'ID_TIPO'});
 
 //RELACION ENTRE VENTAS Y DETELLES_VENTAS:
-DETALLES_VENTA.hasOne(VENTAS,{foreignKey:'ID_DETALLE'})
-VENTAS.belongsTo(DETALLES_VENTA,{foreignKey:'ID_DETALLE'});
-
-
-//RELACIONES ENTRE TICKET Y VENTA:
-TICKET.hasOne('VENTAS',{foreignKey:'ID_VENTAS'});
-VENTAS.hasOne('TICKET',{foreignKey:'ID_TICKET'})
+VENTAS.hasMany(DETALLES_VENTA,{foreignKey:'ID_VENTA'});
+DETALLES_VENTA.belongsTo(VENTAS,{foreignKey:'ID_VENTA'})
 
 module.exports = {
     USUARIOS,
@@ -30,5 +25,4 @@ module.exports = {
     PRODUCTOS,
     TIPOS_PRODUCTO,
     TIPOS_USUARIO,
-    TICKET
 };

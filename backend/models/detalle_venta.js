@@ -4,10 +4,13 @@ const sequelize = require('../configuracionDataBase/BaseDeDatos.js');
 
 const DETALLE_VENTA = sequelize.define('DETALLE_VENTA',{
     ID_DETALLE:{
-        allowNull:false,
         type: DataTypes.INTEGER,
         primaryKey:true,
-        references: {
+        autoIncrement:true
+    },
+    ID_VENTA:{
+        type:DataTypes.INTEGER,
+        allowNull:false,        references: {
             model: 'VENTAS',
             key: 'ID_VENTA'
         }

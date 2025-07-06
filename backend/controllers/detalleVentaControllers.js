@@ -1,19 +1,29 @@
-const DETALLES_VENTA = require('../models/detalle_venta.js')
+const VENTAS = require('../models/ventas');
+const DETALLE_VENTA = require('../models/detalle_venta');
 
-const crearDetalleVenta = async (req,res) =>{
+const crearVentaConDetalles = async (req, res) => {
     try {
-        const {CANTIDAD,PRECIO_UNITARIO,PRECIO_TOTAL} = req.body
+        const { NOMBRE_CLIENTE, productos } = req.body;
 
-        const nuevaDetalle = await DETALLES_VENTA.create({
-            CANTIDAD:CANTIDAD,
-            PRECIO_UNITARIO:PRECIO_UNITARIO,
-            PRECIO_TOTAL:PRECIO_TOTAL
-        })
-        res.status(201).json(nuevaDetalle);
+        // 1. Crear la venta
+        const venta = await VENTAS.create({ NOMBRE_CLIENTE });
+
+        // 2. Crear los detalles de la venta
+        for (const p of productos) {
+            await DETALLE_VENTA.create({
+                ID_VENTA: venta.ID_VENTA,
+                ID_PRODUCTO: p.ID_PRODUCTO,
+                CANTIDAD: p.CANTIDAD,
+                PRECIO_UNITARIO: p.PRECIO_UNITARIO,
+                PRECIO_TOTAL: p.CANTIDAD * p.PRECIO_UNITARIO
+            });
+        }
+
+        res.status(201).json({venta});
 
     } catch (error) {
-        res.status(500).json({ mensaje: 'Error al crear detalle de venta' });
-
+        res.status(500).json({ mensaje:error.message });
     }
+};
 
-}
+module.exports = { crearVentaConDetalles };

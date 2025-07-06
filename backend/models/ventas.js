@@ -12,15 +12,6 @@ const VENTAS = sequelize.define('VENTAS',{
         type: DataTypes.INTEGER,
         autoIncrement:true
     },
-    DETALLE:{
-        allowNull:false,
-        type: DataTypes.INTEGER,
-        references:{
-            model:'DETALLES_VENTA',
-            key:'ID_DETALLE'
-        }
-    },
-
 },
     {tableName:'VENTAS',timestamps: true}
 );
