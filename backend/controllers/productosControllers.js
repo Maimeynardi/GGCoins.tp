@@ -23,8 +23,6 @@ const obtenerProductoPorID = async (req,res) =>{
 
 const crearProducto = async (req, res) => {
     try {
-        console.log('BODY:', req.body);
-        console.log('FILE:', req.file);
 
         const { nombre, descripcion, ID_TIPO, precio, cantidad } = req.body;
 
