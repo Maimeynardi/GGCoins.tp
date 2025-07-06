@@ -29,11 +29,13 @@ const cargarTiposUsuario = require('./controllers/tiposUsuariosController.js');
 const productosRouter = require('./routes/productosRouter.js');
 const usuariosRouter = require('./routes/usuariosRouter.js');
 const authRouter = require('./routes/authRouter.js');
-
+const ticketRouter = require('./routes/detalleRuter.js');
 
 app.use('/productos',productosRouter);
 app.use('/usuarios',usuariosRouter);
 app.use('/', authRouter);
+
+app.use('/ventas', ticketRouter);  
 
 app.use('/uploads', express.static('uploads'));
 

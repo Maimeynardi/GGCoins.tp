@@ -37,7 +37,7 @@ const guardarNombre = () =>{
         window.location.href = "/GGCoins.tp/frontend/cliente-html/productos.html";
 
     }else{
-        conmsole.log('ingrese correctamente el nombre')
+        console.log('ingrese correctamente el nombre')
     }
     
 }
