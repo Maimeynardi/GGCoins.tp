@@ -17,6 +17,11 @@ const crearVentaConDetalles = async (req, res) => {
                 PRECIO_UNITARIO: p.PRECIO_UNITARIO,
                 PRECIO_TOTAL: p.CANTIDAD * p.PRECIO_UNITARIO
             });
+
+            await p.increment(
+                { CANTIDAD: -p.CANTIDAD },
+                { where: { ID_PRODUCTO: p.ID_PRODUCTO } })
+
         }
 
         res.status(201).json({venta});

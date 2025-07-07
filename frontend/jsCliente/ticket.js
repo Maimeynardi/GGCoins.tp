@@ -4,7 +4,9 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 function generarTicket() {
+    
     const nombreCliente = localStorage.getItem('NombreUsuario') || 'Cliente';
+
     const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
 
     document.getElementById('ticket-nombre').textContent = nombreCliente;

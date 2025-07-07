@@ -53,7 +53,7 @@ function crearCardProducto(producto) {
 
             <div class="card-body text-center">
                 <h5 class="card-title mb-1">${producto.NOMBRE}</h5>
-                <p class="precio fw-semibold">ARS ${producto.PRECIO.toLocaleString()}</p>
+                <p class="precio fw-semibold">ARS ${producto.PRECIO}</p>
                 <button class="btn-agregar-carrito" type='button' id='agregarCarrito' onclick='agregarAlCarrito(${JSON.stringify(producto)})'>
                     <i class="bi bi-cart-plus me-2"></i> Agregar al carrito
                 </button>
