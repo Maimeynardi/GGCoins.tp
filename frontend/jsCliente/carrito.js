@@ -71,21 +71,33 @@ const activarEventosCantidad = () => {
     });
 };
 
-const modificarCantidad = (idProducto, cambio) => {
+const modificarCantidad = async (idProducto, cambio) => {
     const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
-    
+    const productos = await obtenerProductos();
     const indiceCarrito = carrito.findIndex(p => p.ID_PRODUCTO === idProducto);
+    const productoBD = productos.find(p => p.ID_PRODUCTO === idProducto);
 
-    if (indiceCarrito !== -1) {
+    if (indiceCarrito === -1) return;
+
+    if (cambio > 0) {
+        if (carrito[indiceCarrito].CANTIDAD < productoBD.CANTIDAD) {
+            carrito[indiceCarrito].CANTIDAD += cambio;
+        } else {
+            alert('No hay más stock disponible');
+            return;
+        }
+    }
+
+    if (cambio < 0) {
         carrito[indiceCarrito].CANTIDAD += cambio;
 
         if (carrito[indiceCarrito].CANTIDAD < 1) {
             carrito.splice(indiceCarrito, 1);
         }
-
-        localStorage.setItem('carrito', JSON.stringify(carrito));
-        crearTarjetasDeCadaProducto();
     }
+
+    localStorage.setItem('carrito', JSON.stringify(carrito));
+    crearTarjetasDeCadaProducto();
 };
 
 const eliminarProductoDelCarrito = (idProducto) => {

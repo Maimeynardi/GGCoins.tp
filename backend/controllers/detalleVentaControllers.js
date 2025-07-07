@@ -1,5 +1,6 @@
-const VENTAS = require('../models/ventas');
-const DETALLE_VENTA = require('../models/detalle_venta');
+const VENTAS = require('../models/ventas.js');
+const DETALLE_VENTA = require('../models/detalle_venta.js');
+const PRODUCTOS = require('../models/productos.js')
 
 const crearVentaConDetalles = async (req, res) => {
     try {
@@ -18,10 +19,15 @@ const crearVentaConDetalles = async (req, res) => {
                 PRECIO_TOTAL: p.CANTIDAD * p.PRECIO_UNITARIO
             });
 
-            await p.increment(
-                { CANTIDAD: -p.CANTIDAD },
-                { where: { ID_PRODUCTO: p.ID_PRODUCTO } })
 
+            const actualizarPostVenta = await PRODUCTOS.findByPk(p.ID_PRODUCTO);
+            await actualizarPostVenta.update({CANTIDAD:(actualizarPostVenta.CANTIDAD - p.CANTIDAD)});
+            
+
+            const productoActualizado = await PRODUCTOS.findByPk(p.ID_PRODUCTO);
+            if (productoActualizado.CANTIDAD <= 0) {
+                await productoActualizado.update({ ACTIVO: false });
+            }
         }
 
         res.status(201).json({venta});
