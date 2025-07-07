@@ -2,6 +2,24 @@
 document.addEventListener("DOMContentLoaded", () => {
     
     document.getElementById('botonBienvenida').addEventListener('click',guardarNombre)
+
+    const botonAdmin = document.createElement("button");
+    botonAdmin.textContent = "Admin";
+    botonAdmin.className = "btn btn-outline-warning mt-2";
+    botonAdmin.style.display = "none"; // oculto por defecto
+    botonAdmin.addEventListener("click", () => {
+        window.location.href = "/GGCoins.tp/frontend/admin-html/admin-login.html";
+    });
+
+    // Insertar el botón después del input
+    const contenedor = document.getElementById("nombreUsuario").parentElement;
+    contenedor.appendChild(botonAdmin);
+
+    // Mostrar botón si el input es "admin" (sin importar mayúsculas/minúsculas)
+    document.getElementById("nombreUsuario").addEventListener("input", (e) => {
+        const valor = e.target.value.trim().toLowerCase();
+        botonAdmin.style.display = valor === "admin" ? "inline-block" : "none";
+    });
 });
 
 const validarIngreso = () =>{

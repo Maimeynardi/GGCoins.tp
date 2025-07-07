@@ -147,6 +147,3 @@ const agregarProducto = async (e) => {
         console.error(error);
     }
 };
-
-
-// export {validacionDatosIngresados};
