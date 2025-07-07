@@ -4,7 +4,7 @@ const TIPOS_USUARIO = require('../models/tipos_usuario.js');
 const DETALLES_VENTA = require('../models/detalle_venta.js');
 const TIPOS_PRODUCTO = require('../models/tipos_producto.js');
 const PRODUCTOS= require('../models/productos.js');
-const TICKET = require('../models/ticket.js');
+
 
 //RELACION ENTRE TIPOS_USUARIOS Y USUARIOS:
 TIPOS_USUARIO.hasMany(USUARIOS,{foreignKey:'ID_TIPO'});
@@ -17,6 +17,11 @@ PRODUCTOS.belongsTo(TIPOS_PRODUCTO,{foreignKey:'ID_TIPO'});
 //RELACION ENTRE VENTAS Y DETELLES_VENTAS:
 VENTAS.hasMany(DETALLES_VENTA,{foreignKey:'ID_VENTA'});
 DETALLES_VENTA.belongsTo(VENTAS,{foreignKey:'ID_VENTA'})
+
+
+PRODUCTOS.hasMany(DETALLE_VENTA, {foreignKey: 'ID_PRODUCTO'});
+DETALLE_VENTA.belongsTo(PRODUCTOS, {foreignKey: 'ID_PRODUCTO'});
+
 
 module.exports = {
     USUARIOS,

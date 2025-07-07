@@ -1,3 +1,4 @@
+const sequelize = require('../configuracionDataBase/BaseDeDatos.js');
 const VENTAS = require('../models/ventas.js');
 const DETALLE_VENTA = require('../models/detalle_venta.js');
 const PRODUCTOS = require('../models/productos.js')
@@ -36,5 +37,29 @@ const crearVentaConDetalles = async (req, res) => {
         res.status(500).json({ mensaje:error.message });
     }
 };
+    
+const obtenerHistorialVentas = async (req, res) => {
+    try {
+        const [ventas] = await sequelize.query(`
+            SELECT 
+            V.ID_VENTA,
+            V.NOMBRE_CLIENTE,
+            V.createdAt AS FECHA,
+            P.NOMBRE AS NOMBRE_PRODUCTO,
+            D.CANTIDAD,
+            D.PRECIO_UNITARIO,
+            D.PRECIO_TOTAL
+            FROM VENTAS V
+            JOIN DETALLE_VENTA D ON V.ID_VENTA = D.ID_VENTA
+            JOIN PRODUCTOS P ON D.ID_PRODUCTO = P.ID_PRODUCTO
+            ORDER BY V.createdAt DESC;
 
-module.exports = { crearVentaConDetalles };
+        `);
+
+        res.json(ventas);
+    } catch (error) {
+        res.status(500).json({ mensaje: "Error al obtener el historial de ventas", error: error.message });
+    }
+};
+
+module.exports = { crearVentaConDetalles, obtenerHistorialVentas };

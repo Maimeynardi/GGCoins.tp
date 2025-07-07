@@ -8,6 +8,14 @@ const DETALLE_VENTA = sequelize.define('DETALLE_VENTA',{
         primaryKey:true,
         autoIncrement:true
     },
+    ID_PRODUCTO:{
+        type: DataTypes.INTEGER,
+        allowNull:false,
+        references: {
+            model: 'PRODUCTOS',
+            key: 'ID_PRODUCTO'
+        }
+    },
     ID_VENTA:{
         type:DataTypes.INTEGER,
         allowNull:false,        references: {

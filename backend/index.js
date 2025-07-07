@@ -21,12 +21,13 @@ const usuariosRouter = require('./routes/usuariosRouter.js');
 const authRouter = require('./routes/authRouter.js');
 const ticketRouter = require('./routes/ventasRouter.js');
 
+
 app.use('/productos',productosRouter);
 app.use('/usuarios',usuariosRouter);
 app.use('/', authRouter);
 
 app.use('/ventas', ticketRouter);  
-
+app
 app.use('/uploads', express.static('uploads'));
 
 
