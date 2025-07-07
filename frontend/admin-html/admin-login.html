@@ -55,7 +55,19 @@
             
         </div>
     </footer>
+
+    <script>
+        if (localStorage.getItem("modo-oscuro") === "true") {
+            document.body.classList.add("modo-oscuro");
+            const icon = document.querySelector("#modoOscuroBtn i");
+            if (icon) {
+            icon.classList.remove("bi-moon");
+            icon.classList.add("bi-sun");
+            }
+        }
+    </script>
     <script src="../js/inicioSesion.js"></script>
+    <script src="/GGCoins.tp/frontend/js/modoOscuro.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

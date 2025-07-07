@@ -227,3 +227,178 @@ L
     background-color: #ddbafa;
     color: #000;
 }
+
+/* Ticket visual transparente pero legible */
+.pdf-ticket {
+    background-color: rgba(0, 0, 0, 0);  /* fondo negro translúcido */
+    color: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    font-family: Arial, sans-serif;
+    max-width: 700px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+/* Tabla dentro del ticket */
+#ticket-productos table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#ticket-productos th, #ticket-productos td {
+    border: 1px solid #dee2e6;
+    padding: 10px;
+    text-align: left;
+    color: white;
+}
+
+
+
+#descargarPDF, #volverInicio {
+    background-color: transparent;
+    border: 2px solid white;
+    color: white;
+    border-radius: 20px;
+    padding: 6px 20px;
+    font-weight: bold;
+    font-size: 15px;
+    transition: all 0.3s ease;
+}
+
+#descargarPDF:hover, #volverInicio:hover {
+    background-color: #ddbafa;
+    color: #000;
+    border-color: #ddbafa;
+}
+
+
+/* Modo oscuro */
+body.modo-oscuro {
+    background: linear-gradient(135deg, #1a0030, #06014e);
+    color: white;
+}
+
+body.modo-oscuro .navbar,
+body.modo-oscuro .footer {
+    background: rgba(0, 0, 0, 0.4);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+body.modo-oscuro .navbar-nav .nav-link,
+body.modo-oscuro .cart-button,
+body.modo-oscuro .footer a {
+    color: #ffffff !important;
+}
+
+body.modo-oscuro .navbar-nav .nav-link:hover,
+body.modo-oscuro .cart-button:hover,
+body.modo-oscuro .footer a:hover {
+    color: #ddbafa !important;
+}
+
+body.modo-oscuro .card {
+    background: rgba(255, 255, 255, 0.1) !important;
+    color: white;
+}
+
+/* Ícono más visible en modo oscuro */
+body.modo-oscuro .btn-dark-mode {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #ddbafa;
+}
+
+body.modo-oscuro .btn-dark-mode:hover {
+    background-color: #ddbafa;
+    color: black;
+}
+
+/* Formulario en modo oscuro */
+body.modo-oscuro form {
+    background-color: #1c1c2e !important;
+    color: white;
+}
+
+/* Inputs, textareas, selects */
+body.modo-oscuro input,
+body.modo-oscuro textarea,
+body.modo-oscuro select {
+    background-color: #121223;
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Placeholder en inputs y textarea */
+body.modo-oscuro input::placeholder,
+body.modo-oscuro textarea::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/* Título del formulario */
+body.modo-oscuro h2 {
+    color: #ddbafa;
+}
+
+/* Bordes del form y campos */
+body.modo-oscuro .form-control,
+body.modo-oscuro .form-select {
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Botón de submit */
+body.modo-oscuro .btn-primary {
+    background-color: #ddbafa;
+    border-color: #ddbafa;
+    color: black;
+}
+
+body.modo-oscuro .btn-primary:hover {
+    background-color: #c398ea;
+    color: black;
+}
+
+/* Texto debajo de la imagen en modo oscuro */
+body.modo-oscuro .text-center p {
+    color: #e9e8e8;
+}
+
+/* Estilo para la imagen en modo oscuro (opcional) */
+body.modo-oscuro .img-thumbnail {
+    background-color: #1a1a2e;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+body.modo-oscuro form.bg-light {
+    background-color: #1e1e2f !important; /* fondo oscuro suave */
+    color: white !important;
+}
+
+body.modo-oscuro form.bg-light .form-control,
+body.modo-oscuro form.bg-light .form-select {
+    background-color: #2c2c3e;
+    color: white;
+    border: 1px solid #555;
+}
+
+body.modo-oscuro form.bg-light .form-control::placeholder {
+    color: #aaa;
+}
+
+body.modo-oscuro form.bg-light label {
+    color: #ddd;
+}
+
+body.modo-oscuro form.bg-light .btn-primary {
+    background-color: #ddbafa;
+    color: black;
+    border: none;
+}
+
+body.modo-oscuro form.bg-light .btn-primary:hover {
+    background-color: #c399e0;
+}
+
+body.modo-oscuro .footer {
+    background: #0d0b24 !important; /* color violeta oscuro */
+}

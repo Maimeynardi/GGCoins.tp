@@ -54,3 +54,21 @@ function generarTicket() {
     listado.innerHTML = html;
     document.getElementById('ticket-total').textContent = total;
 }
+
+document.getElementById("descargarPDF").addEventListener("click", () => {
+    const ticket = document.getElementById("ticket");
+
+    const opciones = {
+        margin: 0.5,
+        filename: `ticket_${new Date().toLocaleDateString()}.pdf`,
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: {
+            scale: 2,
+            backgroundColor: null 
+        },
+        jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+    };
+
+    html2pdf().set(opciones).from(ticket).save();
+});
+

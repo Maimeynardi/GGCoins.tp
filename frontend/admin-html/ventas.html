@@ -21,8 +21,8 @@
                     <span class="gg-text">GG Coins</span>
                 </a>
                 <div class="d-flex align-items-center gap-3 ms-auto">
-                    <a href="admin-login.html" class="btn btn-outline-light rounded-pill d-flex align-items-center gap-2">
-                        <i class="bi bi-arrow-left"></i> Cerrar Sesión
+                    <a href="dashboard.html" class="btn btn-outline-light rounded-pill d-flex align-items-center gap-2">
+                        <i class="bi bi-arrow-left"></i> Volver
                     </a>
                     <button id="modoOscuroBtn" class="btn-dark-mode">
                         <i class="bi bi-moon"></i>
@@ -57,8 +57,18 @@
             
         </div>
     </footer>
-    
+    <script>
+        if (localStorage.getItem("modo-oscuro") === "true") {
+            document.body.classList.add("modo-oscuro");
+            const icon = document.querySelector("#modoOscuroBtn i");
+            if (icon) {
+            icon.classList.remove("bi-moon");
+            icon.classList.add("bi-sun");
+            }
+        }
+    </script>
     <script src="/GGCoins.tp/frontend/js/dashboard/listadoVentas.js"></script>
+    <script src="/GGCoins.tp/frontend/js/modoOscuro.js"></script>    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
     </body>
 </html>

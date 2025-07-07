@@ -33,23 +33,58 @@
             
 
     <main class="container my-5 py-5 text-center text-white">
-        <h2 class="mb-4">🧾 Ticket de Compra</h2>
+        <div class="pdf-ticket text-black text-start p-4 rounded shadow" id="ticket" style="max-width: 700px; width: 100%; margin: auto;">
+            <h2 class="mb-4 text-center">🧾 Ticket de Compra</h2>
 
-        <p><strong>Nombre del cliente:</strong> <span id="ticket-nombre"></span></p>
-        <p><strong>Fecha:</strong> <span id="ticket-fecha"></span></p>
+            <p><strong>Nombre del cliente:</strong> <span id="ticket-nombre"></span></p>
+            <p><strong>Fecha:</strong> <span id="ticket-fecha"></span></p>
 
-        <div id="ticket-productos" class="my-4">
-            <!-- JS insertará aquí la lista de productos -->
+            <div id="ticket-productos" class="my-4"></div>
+
+            <h4 class="text-end">Total: $<span id="ticket-total"></span></h4>
+
+            
         </div>
 
-        <h4>Total: $<span id="ticket-total"></span></h4>
-
-        <div class="mt-4 d-flex justify-content-center gap-3 flex-wrap">
-            <button class="btn btn-outline-light">Descargar PDF</button>
-            <button class="btn btn-outline-success" onclick="window.location.href = 'bienvenida.html'">Volver al inicio</button>
+        <!-- 🔽 Botones integrados al final del ticket -->
+        <div class="botones-ticket mt-4 d-flex justify-content-center gap-3 flex-wrap">
+            <button id="descargarPDF" class="btn btn-outline-primary">Descargar PDF</button>
+            <button id="volverInicio" class=" btn btn-outline-success" onclick="window.location.href = 'bienvenida.html'">Volver al inicio</button>
         </div>
-</main>
+    </main>
+    
+
+    <footer class="footer text-center text-white py-3">
+        <div>
+            <h5>GG Coins</h5>
+            <p>Proyecto realizado por:</p>
+            <ul>
+                <li>Maia Meynardi</li>
+                <li>Emmanuel Malve</li>
+            </ul>
+
+            <div class="mb-3">
+                <a href="#" class="text-light me-3"><i class="bi bi-github"></i></a>
+                <a href="#" class="text-light me-3"><i class="bi bi-linkedin"></i></a>
+            </div>
+
+            
+        </div>
+    </footer>
+    <script>
+        if (localStorage.getItem("modo-oscuro") === "true") {
+            document.body.classList.add("modo-oscuro");
+            const icon = document.querySelector("#modoOscuroBtn i");
+            if (icon) {
+            icon.classList.remove("bi-moon");
+            icon.classList.add("bi-sun");
+            }
+        }
+    </script>
     <script src="../jsCliente/ticket.js"></script>
+    <script src="/GGCoins.tp/frontend/js/modoOscuro.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
 </body>
 </html>

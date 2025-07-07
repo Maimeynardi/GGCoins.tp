@@ -54,7 +54,7 @@ function crearCardProducto(producto) {
             <div class="card-body text-center">
                 <h5 class="card-title mb-1">${producto.NOMBRE}</h5>
                 <p class="precio fw-semibold">ARS ${producto.PRECIO}</p>
-                <button class="btn-agregar-carrito" type='button' id='agregarCarrito' onclick='agregarAlCarrito(${JSON.stringify(producto)})'>
+                <button class="btn-agregar-carrito" type='button' id='agregarCarrito'>
                     <i class="bi bi-cart-plus me-2"></i> Agregar al carrito
                 </button>
             </div>
@@ -72,30 +72,30 @@ function crearCardProducto(producto) {
 
 
 const agregarAlCarrito = (producto) => {
-
     let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
 
     let productoExistente = carrito.find(item => item.ID_PRODUCTO === producto.ID_PRODUCTO);
 
     if (productoExistente) {
-        if (productoExistente.cantidad < producto.CANTIDAD) {
-            productoExistente.cantidad += 1;
+        if (productoExistente.CANTIDAD < producto.CANTIDAD) {
+            productoExistente.CANTIDAD += 1;
         } else {
             alert(`No hay más stock disponible para "${producto.NOMBRE}".`);
             return;
         }
     } else {
-            carrito.push({
-                ID_PRODUCTO: producto.ID_PRODUCTO,
-                NOMBRE: producto.NOMBRE,
-                PRECIO: producto.PRECIO,
-                URL_IMAGEN: producto.URL_IMAGEN,
-                CANTIDAD: 1,
-            });
-        
+        carrito.push({
+            ID_PRODUCTO: producto.ID_PRODUCTO,
+            NOMBRE: producto.NOMBRE,
+            PRECIO: producto.PRECIO,
+            URL_IMAGEN: producto.URL_IMAGEN,
+            CANTIDAD: 1,
+        });
+
     }
+    alert(`${producto.NOMBRE} agregado al carrito`);
 
     localStorage.setItem('carrito', JSON.stringify(carrito));
-    alert(`${producto.NOMBRE} agregado al carrito`);
 }
+
 

@@ -2,7 +2,6 @@
 document.addEventListener("DOMContentLoaded", () => {
     
     document.getElementById('botonBienvenida').addEventListener('click',guardarNombre)
-    localStorage.clear();
 });
 
 const validarIngreso = () =>{
