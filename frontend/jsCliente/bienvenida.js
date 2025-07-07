@@ -1,6 +1,6 @@
 
 document.addEventListener("DOMContentLoaded", () => {
-    
+    localStorage.removeItem('carrito');
     document.getElementById('botonBienvenida').addEventListener('click',guardarNombre)
 
     const botonAdmin = document.createElement("button");
