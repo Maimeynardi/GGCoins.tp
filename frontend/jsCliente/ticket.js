@@ -33,12 +33,12 @@ function generarTicket() {
     `;
 
     carrito.forEach(producto => {
-        const subtotal = producto.PRECIO_UNITARIO * producto.CANTIDAD;
+        const subtotal = producto.PRECIO * producto.CANTIDAD;
         html += `
             <tr>
                 <td>${producto.NOMBRE}</td>
                 <td>${producto.CANTIDAD}</td>
-                <td>$${producto.PRECIO_UNITARIO}</td>
+                <td>$${producto.PRECIO}</td>
                 <td>$${subtotal}</td>
             </tr>
         `;

@@ -97,7 +97,7 @@ const eliminarProductoDelCarrito = (idProducto) => {
 
 
 async function finalizarCompra() {
-    const nombreCliente = localStorage.getItem("nombreUsuario") || "Cliente";
+    const nombreCliente = localStorage.getItem("NombreUsuario") || "Cliente";
     const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
 
     if (!carrito.length) {
@@ -118,16 +118,15 @@ async function finalizarCompra() {
     };
 
     try {
-    await fetch("http://localhost:3030/ventas/crear", {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(venta)
+        await fetch("http://localhost:3030/ventas/crear", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(venta)
     });
-        if (!res.ok) throw new Error("Error al guardar la venta");
 
-        window.location.href = "/GGCoins.tp/frontend/cliente-html/ticket.html";
+    window.location.href = "/GGCoins.tp/frontend/cliente-html/ticket.html";
 
     } catch (error) {
         console.error("Error al finalizar la compra:", error);
