@@ -5,7 +5,9 @@
 </p>
 
 🕹️ GGCoins es una plataforma de autoservicio para la venta de videojuegos y monedas virtuales (creditos) para títulos populares como Valorant, League of Legends, Fortnite, entre otros.
+
 💸 Los usuarios pueden explorar productos con la posibilidad de seleccionar la categoria (juegos/creditos) en la que se encuentren interesados, con el fin de mejorar la experiencia de usuario. Tambien añadimos funcionalidad de agregar y/o restar productos en el carrito. Luego de confirmar su carrito se generará un ticket con los detalles de la compra.
+
 🛡️ El sistema cuenta con autenticación segura para administradores, quienes tienen la posibilidad de ingresar y/o modificar los datos del producto mediante un formulario sencillo e intuitivo. Como asi tambien, desactivalos y volver activarlos.
 
 ---
@@ -101,25 +103,22 @@ GGCoins.tp/                     # Proyecto principal
 
 ## 🔧 Inicio Rápido
     1. Clona el repositorio
-    ```bash
         git clone https://github.com/Maimeynardi/GGCoins.tp.git
-    ```
+        
     2. Explora el contenido
-    ```bash
         cd GGCoins.tp
-    ```
+        
     3. Instala las dependencias
-    ```bash
         cd backend/
         npm install
-    ```
+        
     4. Inicializa el servidor
-    ```bash
         cd backend/
         node index.js
-    ```
+
     5. Abre el proyecto
         Abre bienvenida.html en tu navegador para ver la página principal.
+        
     6. Ingreso
         Como admin: debes escribir en el input de bienvenida "admin" y se genera un boton que te redirige al log-in de admin
         Como cliente: debes escribir tu nombre en el input de bienvenida y disfruta
