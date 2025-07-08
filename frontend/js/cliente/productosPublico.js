@@ -7,7 +7,6 @@ async function cargarProductos() {
         const productos = await obtenerProductos();
         limpiarContenedores();
         productos.forEach(producto => {
-            //if (!producto.ACTIVO) return;
             const card = crearCardProducto(producto);
             agregarCardAlContenedor(card, producto.ID_TIPO);
         });
@@ -47,7 +46,7 @@ function crearCardProducto(producto) {
                 <img src="http://localhost:3030${producto.URL_IMAGEN}" class="card-img-top" alt="${producto.NOMBRE}">
 
                 <div class="descripcion-hover p-3">
-                    <p class="mb-0 small">${producto.DESCRIPCION}</p>
+                    <p class="small">${producto.DESCRIPCION}</p>
                 </div>
             </div>
 
