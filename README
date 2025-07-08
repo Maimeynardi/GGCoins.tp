@@ -96,26 +96,34 @@ GGCoins.tp/                     # Proyecto principal
 │           └── validaciones.js
 │           └── modoOscuro.js
 └── README.md                  # Documentación del proyecto
-...
+```
+
 
 ## 🔧 Inicio Rápido
-```bash
     1. Clona el repositorio
+    ```bash
         git clone https://github.com/Maimeynardi/GGCoins.tp.git
+    ```
     2. Explora el contenido
+    ```bash
         cd GGCoins.tp
+    ```
     3. Instala las dependencias
+    ```bash
         cd backend/
         npm install
+    ```
     4. Inicializa el servidor
+    ```bash
         cd backend/
         node index.js
+    ```
     5. Abre el proyecto
         Abre bienvenida.html en tu navegador para ver la página principal.
     6. Ingreso
         Como admin: debes escribir en el input de bienvenida "admin" y se genera un boton que te redirige al log-in de admin
         Como cliente: debes escribir tu nombre en el input de bienvenida y disfruta
-...
+
 
 ## 📮 Rutas Principales
 
