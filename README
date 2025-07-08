@@ -98,6 +98,7 @@ GGCoins.tp/                     # Proyecto principal
 └── README.md                  # Documentación del proyecto
 
 ## 🔧 Inicio Rápido
+```bash
     1. Clona el repositorio
         git clone https://github.com/Maimeynardi/GGCoins.tp.git
     2. Explora el contenido
@@ -116,10 +117,12 @@ GGCoins.tp/                     # Proyecto principal
 
 ## 📮 Rutas Principales
 
-POST	/login	    Iniciar sesión
-GET	    /productos	Listar productos
-POST	/usuarios	Crear usuario
-POST	/ventas	    Registrar una venta
+| Método | Ruta        | Descripción         |
+|--------|-------------|---------------------|
+| POST   | `/login`    | Iniciar sesión      |
+| GET    | `/productos`| Listar productos    |
+| POST   | `/usuarios` | Crear usuario       |
+| POST   | `/ventas`   | Registrar una venta |
 
 ## 👤 Autores
 * ✨ **Emmanuel Malve** – [emmanuelalbe](https://github.com/emmanuelalbe)
