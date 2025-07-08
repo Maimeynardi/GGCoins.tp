@@ -1,7 +1,6 @@
 
 document.addEventListener("DOMContentLoaded", () => {
     cargarProductosListado();
-    document.getElementById('modificarProductoForm').addEventListener('submit', modificarDatos);
 });
 
 async function cargarProductosListado() {
