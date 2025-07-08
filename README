@@ -96,6 +96,7 @@ GGCoins.tp/                     # Proyecto principal
 │           └── validaciones.js
 │           └── modoOscuro.js
 └── README.md                  # Documentación del proyecto
+...
 
 ## 🔧 Inicio Rápido
 ```bash
@@ -114,6 +115,7 @@ GGCoins.tp/                     # Proyecto principal
     6. Ingreso
         Como admin: debes escribir en el input de bienvenida "admin" y se genera un boton que te redirige al log-in de admin
         Como cliente: debes escribir tu nombre en el input de bienvenida y disfruta
+...
 
 ## 📮 Rutas Principales
 
