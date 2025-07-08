@@ -1,6 +1,6 @@
 # 🛍️ Nombre del Proyecto
     GGCOINS
-    ![alt text](logo.png)
+    ![alt text](frontend/img/logo.png)
 🕹️ GGCoins es una plataforma de autoservicio para la venta de videojuegos y monedas virtuales (creditos) para títulos populares como Valorant, League of Legends, Fortnite, entre otros.
 💸 Los usuarios pueden explorar productos con la posibilidad de seleccionar la categoria (juegos/creditos) en la que se encuentren interesados, con el fin de mejorar la experiencia de usuario. Tambien añadimos funcionalidad de agregar y/o restar productos en el carrito. Luego de confirmar su carrito se generará un ticket con los detalles de la compra.
 🛡️ El sistema cuenta con autenticación segura para administradores, quienes tienen la posibilidad de ingresar y/o modificar los datos del producto mediante un formulario sencillo e intuitivo. Como asi tambien, desactivalos y volver activarlos.
@@ -121,5 +121,4 @@ POST	/ventas	    Registrar una venta
 ✨ Emmanuel Malve - emmanuelalbe
 ✨ Maia Meynardi -  Maimeynardi
 
-Este proyecto fue hecho con mucho esfuerzo y café ☕✨
-¡Con amor para quienes aman programar! 💻💖
+Este proyecto es de uso y fue desarrollado como trabajo práctico final de la materia Programación III, fue hecho con mucho esfuerzo y café ☕✨
